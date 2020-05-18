@@ -12,12 +12,15 @@
 @import './_agent-reset.css';
 @import './_base.scss';
 
-
 // Components
 // @import './preloader.scss';
-@import './app.scss';
-
 
 // Layout
 // @import './footer.scss';
 // @import './mobile.scss';
+
+// Vendors
+@import './_bootstrap.scss';
+
+// App
+@import './app.scss';
