@@ -7,9 +7,11 @@
 $white: #fff;
 $black: #000;
 $blue: #0083ee;
+$grey: #5d5d5c;
 
 // Theme Colour
-$primary: $white;
+$primary: $black;
+$secondary: $grey;
 
 // Fonts
 $font-primary: 'Open Sans';
@@ -34,4 +36,4 @@ $text-shadow-colour-2: #555555;
 $text-shadow-colour-3: #000;
 
 // linear background Colour
-$linear-bg-1: linear-gradient(135deg, $blue, #034174);
+$linear-bg-1: linear-gradient(135deg, $grey, #333333);
