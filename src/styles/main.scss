@@ -4,14 +4,14 @@
   **/
 
 
+// Variables
+@import './variables.scss';
+@import './mixin.scss';
 
 // Global Reset / Base
 @import './_agent-reset.css';
 @import './_base.scss';
 
-// Variables
-@import './variables.scss';
-@import './mixin.scss';
 
 // Components
 // @import './preloader.scss';
