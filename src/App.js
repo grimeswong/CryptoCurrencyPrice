@@ -6,7 +6,28 @@ function App() {
     <main className="App">
       <div className="container">
         <h1>Cryptocurrency Price</h1>
-        <div className="list-wrapper">
+
+        <div className="section selection-wrapper">
+          <div className="search-wrapper col-sm-6">
+            <input className="form-control" type="text" placeholder="Search" aria-label="Search" />
+          </div>
+          <div className="form-wrapper col-sm-6">
+            <div className="form-check form-check-inline">
+              <input className="form-check-input" type="radio" name="radio" id="change" value="option1" checked/>
+              <label className="form-check-label" htmlFor="change">
+                Change
+              </label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input className="form-check-input" type="radio" name="radio" id="volume" value="option2" />
+              <label className="form-check-label" htmlFor="volumn">
+                Volume
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className="section list-wrapper">
           <table className="table">
             <thead>
               <tr>

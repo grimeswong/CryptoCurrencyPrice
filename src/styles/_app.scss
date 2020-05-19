@@ -3,6 +3,25 @@
   color: $primary-text;
   background-color: $primary;
 
+  h1, h2 {
+    padding: 1rem 5px;
+  }
+
+  .section {
+    padding: 1rem 0px;
+  }
+
+  .selection-wrapper {
+    div {
+      display: inline-block;
+    }
+
+    .form-wrapper {
+      text-align: right;
+    }
+
+  }
+
   table {
     color: $secondary;
   }
