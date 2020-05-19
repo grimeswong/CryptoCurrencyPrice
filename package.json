@@ -1,5 +1,5 @@
 {
-  "name": "drummachine",
+  "name": "reactApp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -32,5 +32,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^1.0.4"
   }
 }

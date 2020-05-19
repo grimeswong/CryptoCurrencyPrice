@@ -6,12 +6,22 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataLoaded: false
+      dataLoaded: false,
+      data: ""
     }
   }
 
   componentDidMount() {
+    this.callAPI();
+  }
 
+  callAPI() {
+    fetch(`/exchange-api/v1/public/asset-service/product/get-products`)
+    .then(res => console.log(res))
+    .then(res => this.setState({
+          dataLoaded: true,
+          data: res
+    }))
   }
 
   render() {
@@ -62,6 +72,7 @@ class App extends Component {
                 </tr>
               </tbody>
             </table>
+            <div>{this.state.data}</div>
           </div>
         </div>
       </main>
