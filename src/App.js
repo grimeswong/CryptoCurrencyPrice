@@ -65,12 +65,12 @@ class App extends Component {
                 <tr>
                   <td>{!this.state.dataLoaded ? null : `${this.state.data[0].b}/${this.state.data[0].q}`}</td>
                   <td>{!this.state.dataLoaded ? null : this.state.data[0].c}</td>
-                  <td>{!this.state.dataLoaded ? null : this.state.data[0].c / this.state.data[0].o}</td>
+                  <td>{!this.state.dataLoaded ? null : `${parseFloat(this.state.data[0].c / this.state.data[0].o).toFixed(2) >= 0 ? "+" : null}${parseFloat(this.state.data[0].c / this.state.data[0].o).toFixed(2)}%`}</td>
                 </tr>
                 <tr>
-                  <td>ADX/BTC</td>
-                  <td>0.00001012</td>
-                  <td>+1.10</td>
+                  <td>{!this.state.dataLoaded ? null : `${this.state.data[1].b}/${this.state.data[1].q}`}</td>
+                  <td>{!this.state.dataLoaded ? null : this.state.data[1].c}</td>
+                  <td>{!this.state.dataLoaded ? null : `${parseFloat(this.state.data[1].c / this.state.data[1].o).toFixed(2) >= 0 ? "+" : null}${parseFloat(this.state.data[1].c / this.state.data[1].o).toFixed(2)}%`}</td>
                 </tr>
               </tbody>
             </table>
