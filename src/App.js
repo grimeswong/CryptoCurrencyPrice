@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './styles/main.scss';
+import CoinDetails from './components/CoinDetails.js';
 
 class App extends Component {
 
@@ -62,16 +63,7 @@ class App extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{!this.state.dataLoaded ? null : `${this.state.data[0].b}/${this.state.data[0].q}`}</td>
-                  <td>{!this.state.dataLoaded ? null : this.state.data[0].c}</td>
-                  <td>{!this.state.dataLoaded ? null : `${parseFloat(this.state.data[0].c / this.state.data[0].o).toFixed(2) >= 0 ? "+" : null}${parseFloat(this.state.data[0].c / this.state.data[0].o).toFixed(2)}%`}</td>
-                </tr>
-                <tr>
-                  <td>{!this.state.dataLoaded ? null : `${this.state.data[1].b}/${this.state.data[1].q}`}</td>
-                  <td>{!this.state.dataLoaded ? null : this.state.data[1].c}</td>
-                  <td>{!this.state.dataLoaded ? null : `${parseFloat(this.state.data[1].c / this.state.data[1].o).toFixed(2) >= 0 ? "+" : null}${parseFloat(this.state.data[1].c / this.state.data[1].o).toFixed(2)}%`}</td>
-                </tr>
+                <CoinDetails data={this.state.data} dataLoaded={this.state.dataLoaded}/>
               </tbody>
             </table>
           </div>
