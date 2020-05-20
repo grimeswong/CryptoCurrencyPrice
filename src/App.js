@@ -9,7 +9,9 @@ class App extends Component {
     this.state = {
       dataLoaded: false,
       data: [],
-      sortType: "q"
+      sortType: "b",
+      searchStr: "",
+      displayData: []
     }
   }
 
@@ -22,13 +24,33 @@ class App extends Component {
     .then(res => res.json())
     .then(res => this.setState({
           dataLoaded: true,
-          data: res.data
+          data: res.data,
+          displayData: res.data
     }))
+  }
+
+  updateList() {
+    if(this.state.searchStr === "") {
+      this.setState({
+        displayData: this.state.data
+      })
+    } else {
+      this.setState({
+        displayData: this.state.data.filter((element) => element.q === this.state.searchStr.toUpperCase() || element.b === this.state.searchStr.toUpperCase())
+      })
+    }
+  }
+
+  async updateInput(e) {
+    await this.setState({
+      searchStr: e.target.value
+    })
+    this.updateList();
   }
 
   render() {
 
-    if(this.state.dataLoaded === true) {console.log(this.state.data)} // debugger: the first render hasn't got the data yet
+    // if(this.state.dataLoaded === true) {console.log(this.state.data)} // debugger: the first render hasn't got the data yet
 
     return(
       <main className="App">
@@ -37,7 +59,7 @@ class App extends Component {
 
           <div className="section selection-wrapper">
             <div className="search-wrapper col-sm-6">
-              <input className="form-control" type="text" placeholder="Search" aria-label="Search" />
+              <input className="form-control" type="text" placeholder="Search" aria-label="Search" onChange={(e) => this.updateInput(e)} value={this.state.searchStr}/>
             </div>
             <div className="form-wrapper col-sm-6">
               <div className="form-check form-check-inline">
@@ -65,7 +87,7 @@ class App extends Component {
                 </tr>
               </thead>
               <tbody>
-                <CoinDetails data={this.state.data} dataLoaded={this.state.dataLoaded} sortType={this.state.sortType}/>
+                <CoinDetails data={this.state.displayData} dataLoaded={this.state.dataLoaded} sortType={this.state.sortType}/>
               </tbody>
             </table>
           </div>
