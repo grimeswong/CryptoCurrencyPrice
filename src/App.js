@@ -7,7 +7,7 @@ class App extends Component {
     super(props);
     this.state = {
       dataLoaded: false,
-      data: ""
+      data: []
     }
   }
 
@@ -17,14 +17,16 @@ class App extends Component {
 
   callAPI() {
     fetch(`/exchange-api/v1/public/asset-service/product/get-products`)
-    .then(res => console.log(res))
+    .then(res => res.json())
     .then(res => this.setState({
           dataLoaded: true,
-          data: res
+          data: res.data
     }))
+    // .then(res => console.log(res.data[0]))
   }
 
   render() {
+    if(this.state.dataLoaded === true) {console.log(this.state.data[0])} // the first render hasn't got the data yet
     return(
       <main className="App">
         <div className="container">
@@ -61,9 +63,9 @@ class App extends Component {
               </thead>
               <tbody>
                 <tr>
-                  <td>ADA/BTC</td>
-                  <td>0.00000617</td>
-                  <td>-0.64</td>
+                  <td>{!this.state.dataLoaded ? null : `${this.state.data[0].b}/${this.state.data[0].q}`}</td>
+                  <td>{!this.state.dataLoaded ? null : this.state.data[0].c}</td>
+                  <td>{!this.state.dataLoaded ? null : this.state.data[0].c / this.state.data[0].o}</td>
                 </tr>
                 <tr>
                   <td>ADX/BTC</td>
@@ -72,7 +74,6 @@ class App extends Component {
                 </tr>
               </tbody>
             </table>
-            <div>{this.state.data}</div>
           </div>
         </div>
       </main>
