@@ -8,7 +8,8 @@ class App extends Component {
     super(props);
     this.state = {
       dataLoaded: false,
-      data: []
+      data: [],
+      sortType: "q"
     }
   }
 
@@ -23,11 +24,12 @@ class App extends Component {
           dataLoaded: true,
           data: res.data
     }))
-    // .then(res => console.log(res.data[0]))
   }
 
   render() {
-    if(this.state.dataLoaded === true) {console.log(this.state.data[0])} // the first render hasn't got the data yet
+
+    if(this.state.dataLoaded === true) {console.log(this.state.data)} // debugger: the first render hasn't got the data yet
+
     return(
       <main className="App">
         <div className="container">
@@ -63,7 +65,7 @@ class App extends Component {
                 </tr>
               </thead>
               <tbody>
-                <CoinDetails data={this.state.data} dataLoaded={this.state.dataLoaded}/>
+                <CoinDetails data={this.state.data} dataLoaded={this.state.dataLoaded} sortType={this.state.sortType}/>
               </tbody>
             </table>
           </div>
