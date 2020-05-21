@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './styles/main.scss';
+import Category from './components/Category.js';
 import CoinDetails from './components/CoinDetails.js';
 
 class App extends Component {
@@ -56,7 +57,9 @@ class App extends Component {
       <main className="App">
         <div className="container">
           <h1>Cryptocurrency Price</h1>
-
+          <div className="section category-wrapper col-sm-6">
+            <Category />
+          </div>
           <div className="section selection-wrapper">
             <div className="search-wrapper col-sm-6">
               <input className="form-control" type="text" placeholder="Search" aria-label="Search" onChange={(e) => this.updateInput(e)} value={this.state.searchStr}/>
