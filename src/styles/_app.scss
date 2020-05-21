@@ -8,12 +8,15 @@ html {
   background-color: $primary;
 
   h1, h2 {
-
     padding: 1rem 5px;
+    margin: 0;
   }
 
   .section {
     padding: 1rem 0px;
+    div {
+      padding: 5px;
+    }
   }
 
   .selection-wrapper {
@@ -29,7 +32,7 @@ html {
 
   table {
     color: $primary-text;
-    font-family: Rubik; 
+    font-family: Rubik;
     th, td {
       width: 33.3%;
       border-color: rgb(56, 56, 56);
