@@ -8,6 +8,7 @@ html {
   background-color: $primary;
 
   h1, h2 {
+
     padding: 1rem 5px;
   }
 
@@ -27,9 +28,17 @@ html {
   }
 
   table {
-    color: $secondary;
+    color: $primary-text;
+    font-family: Rubik; 
     th, td {
       width: 33.3%;
+      border-color: rgb(56, 56, 56);
+    }
+    th:nth-child(1), th:nth-child(2){
+      text-align: left;
+    }
+    td:nth-child(1), td:nth-child(2){
+      text-align: left;
     }
   }
 }

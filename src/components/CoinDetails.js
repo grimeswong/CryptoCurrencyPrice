@@ -25,7 +25,9 @@ const CoinDetails = (props) => {
         <tr key={element.s}>
           <td>{`${element.b}/${element.q}`}</td>
           <td>{element.c}</td>
-          <td>{`${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2) >= 0 ? "+" : ""}${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2)}%`}</td>
+          <td class={parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2) >= 0 ? "positive" : "negative"}>
+            {`${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2) >= 0 ? "+" : ""}${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2)}%`}
+          </td>
         </tr>
     )
   });
