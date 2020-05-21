@@ -3,10 +3,14 @@
   **/
 
 
-@include tablet {  
-
+@include tablet {
+  html {
+    overflow-y: auto;
+  }
 } /* tablet end */
 
 @include mobile {
-
+  html {
+    overflow-y: auto;
+  }
 } /* mobile end */

@@ -13,14 +13,12 @@
 @import './_base.scss';
 
 // Components
+@import './app.scss';
 // @import './preloader.scss';
 
 // Layout
 // @import './footer.scss';
-// @import './mobile.scss';
+@import './mobile.scss';
 
 // Vendors
 @import './_bootstrap.scss';
-
-// App
-@import './app.scss';
