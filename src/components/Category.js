@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Dropdown } from 'react-bootstrap';
 
 const Category = (props) => {
 
@@ -42,13 +43,31 @@ const Category = (props) => {
   console.log(sortedCategories.sort(sortData));
 
   // Load the Category list and with button groups
-  // const displayCategory = sortedCategories.sort(sortData).map((element) => {
-  //   return (<li key={element.category}>{element.category}</li>);
-  // })
+  const displayCategory = sortedCategories.map((element) => {
+    if(element.length >2) {
+      return (
+        <Dropdown>
+          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+            {element[0]}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">{element[1]}</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">{element[2]}</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">{element[3]}</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+      )
+    }
+    else {
+      return (<Button variant='secondary'>{element[0]}</Button>)
+    }
+  })
 
   return (
     <ul>
-      {}
+      {displayCategory}
     </ul>
   )
 }
