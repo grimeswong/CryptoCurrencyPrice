@@ -22,17 +22,29 @@ const Category = (props) => {
     let groups = types[type].filter((item, index) => {
       return types[type].indexOf(item) === index;
     });
-    sortedCategories.push({Category: type, symbols: groups});
+    sortedCategories.push([type,...groups]);
   }
 
   console.log(sortedCategories); //debugger
 
+  // Sort the Categories by number of its symbols
+  // function for sorting data by providing symbol
+  const sortData = (a, b) => {
+    if(a[0] < b[0]){
+      return -1;
+    } else if (a[0] > b[0]) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  console.log(sortedCategories.sort(sortData));
+
   // Load the Category list and with button groups
-  // const listCategories = types.sort().map((element) => {
-  //   return (
-  //     <li key={element}>{`${element}`}</li>
-  //   )
-  // });
+  // const displayCategory = sortedCategories.sort(sortData).map((element) => {
+  //   return (<li key={element.category}>{element.category}</li>);
+  // })
 
   return (
     <ul>
