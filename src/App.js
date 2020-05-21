@@ -57,8 +57,8 @@ class App extends Component {
       <main className="App">
         <div className="container">
           <h1>Cryptocurrency Price</h1>
-          <div className="section category-wrapper col-sm-6">
-            <Category />
+          <div className="section category-wrapper col-sm-12">
+            <Category data={this.state.data} />
           </div>
           <div className="section selection-wrapper">
             <div className="search-wrapper col-sm-6">
