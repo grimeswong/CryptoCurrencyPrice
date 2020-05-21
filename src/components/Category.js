@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dropdown } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 
 const Category = (props) => {
 
@@ -23,7 +23,7 @@ const Category = (props) => {
     let groups = types[type].filter((item, index) => {
       return types[type].indexOf(item) === index;
     });
-    sortedCategories.push([type,...groups]);
+    sortedCategories.push([type,...groups.sort()]);
   }
 
   console.log(sortedCategories); //debugger
