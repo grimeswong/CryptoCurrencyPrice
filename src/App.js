@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       dataLoaded: false,
       data: [],
-      sortType: "b",
+      sortType: "q",
       searchStr: "",
       displayData: []
     }
