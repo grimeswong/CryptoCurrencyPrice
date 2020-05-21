@@ -4,20 +4,23 @@
   **/
 
 
+// Variables
+@import './variables.scss';
+@import './mixin.scss';
 
 // Global Reset / Base
 @import './_agent-reset.css';
 @import './_base.scss';
 
-// Variables
-@import './variables.scss';
-@import './mixin.scss';
-
 // Components
-// @import './preloader.scss';
 @import './app.scss';
-
+// @import './preloader.scss';
+@import './Category.scss';
+@import './CoinDetails.scss';
 
 // Layout
 // @import './footer.scss';
-// @import './mobile.scss';
+@import './mobile.scss';
+
+// Vendors
+@import './_bootstrap.scss';

@@ -1,0 +1,28 @@
+ul {
+  display: flex;
+  list-style-type: none;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 15px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $gold;
+  }
+
+  li {
+    padding: 5px 10px 15px;
+  }
+}
+
+.removeArrow {
+  .dropdown-toggle::after {
+    display:none;
+  }
+}

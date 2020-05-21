@@ -1,5 +1,53 @@
+html {
+  overflow-y: scroll;
+}
+
 .App {
+  width: 100%;
+  min-height: 100vh;
   text-align: center;
-  color: black;
-  background-color: white;
+  color: $primary-text;
+  background-color: $primary;
+
+  h1, h2 {
+    padding: 1rem 5px;
+    margin: 0;
+  }
+
+  .section {
+    padding: 1rem 0px;
+    div {
+      padding: 5px;
+    }
+  }
+
+  .category-wrapper {
+    width: 100%;
+  }
+
+  .selection-wrapper {
+    div {
+      display: inline-block;
+    }
+
+    .form-wrapper {
+      text-align: right;
+    }
+
+  }
+
+  table {
+    color: $primary-text;
+    font-family: Rubik;
+    th, td {
+      width: 33.3%;
+      border-color: rgb(56, 56, 56);
+    }
+    th:nth-child(1), th:nth-child(2){
+      text-align: left;
+    }
+    td:nth-child(1), td:nth-child(2){
+      text-align: left;
+    }
+  }
 }

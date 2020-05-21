@@ -3,10 +3,75 @@
   **/
 
 
-@include tablet {  
-
+@include tablet {
+  html {
+    overflow-y: auto;
+  }
+  .App {
+    h1 {
+      font-size: 2rem;
+    }
+  }
 } /* tablet end */
 
 @include mobile {
+  html {
+    overflow-y: auto;
+  }
+  .App {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .category-wrapper {
+      ul{
+        &::-webkit-scrollbar {
+          width: 10px;
+          height: 5px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: $gold;
+        }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        li {
+          padding: 5px 10px 5px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
 
 } /* mobile end */
+
+@include extra-small {
+  .App {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .category-wrapper {
+      ul{
+        &::-webkit-scrollbar {
+          width: 10px;
+          height: 5px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: $gold;
+        }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        li {
+          padding: 5px 10px 5px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  table {
+    font-size: 0.8rem;
+  }
+}
