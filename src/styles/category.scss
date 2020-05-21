@@ -20,3 +20,9 @@ ul {
     padding: 5px 10px 15px;
   }
 }
+
+.removeArrow {
+  .dropdown-toggle::after {
+    display:none;
+  }
+}

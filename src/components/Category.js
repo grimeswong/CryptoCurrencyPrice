@@ -45,23 +45,32 @@ const Category = (props) => {
   // Load the Category list and with button groups
   const displayCategory = sortedCategories.map((element) => {
     if(element.length >2) {
+
+      const items = [];
+      for (let i=1; i<element.length; i++) {
+        items.push(<Dropdown.Item key={element[i]} href="#/action-1">{element[i]}</Dropdown.Item>)
+      }
+
       return (
-        <Dropdown>
+        <Dropdown key={element[0]}>
           <Dropdown.Toggle variant="secondary" id="dropdown-basic">
             {element[0]}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">{element[1]}</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">{element[2]}</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">{element[3]}</Dropdown.Item>
+            {items}
           </Dropdown.Menu>
         </Dropdown>
-
       )
     }
     else {
-      return (<Button variant='secondary'>{element[0]}</Button>)
+      return (
+        <Dropdown key={element[0]} className="removeArrow">
+          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+            {element[0]}
+          </Dropdown.Toggle>
+        </Dropdown>
+      )
     }
   })
 
