@@ -30,14 +30,18 @@ class App extends Component {
     }))
   }
 
-  updateList() {
-    if(this.state.searchStr === "") {
+  querySelection = (symbol) => {
+    this.updateList(symbol);
+  }
+
+  updateList(str) {
+    if(str === "") {
       this.setState({
         displayData: this.state.data
       })
     } else {
       this.setState({
-        displayData: this.state.data.filter((element) => element.q === this.state.searchStr.toUpperCase() || element.b === this.state.searchStr.toUpperCase())
+        displayData: this.state.data.filter((element) => element.q === str.toUpperCase() || element.b === str.toUpperCase())
       })
     }
   }
@@ -46,7 +50,7 @@ class App extends Component {
     await this.setState({
       searchStr: e.target.value
     })
-    this.updateList();
+    this.updateList(this.state.searchStr);
   }
 
   render() {
@@ -58,7 +62,7 @@ class App extends Component {
         <div className="container">
           <h1>Cryptocurrency Price</h1>
           <div className="section category-wrapper col-sm-12">
-            <Category data={this.state.data} />
+            <Category data={this.state.data} querySelection={this.querySelection}/>
           </div>
           <div className="section selection-wrapper">
             <div className="search-wrapper col-sm-6">
