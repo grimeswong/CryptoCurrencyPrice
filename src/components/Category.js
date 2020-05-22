@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, DropdownButton, ButtonGroup, Button } from 'react-bootstrap';
 
 const Category = (props) => {
 
@@ -53,30 +53,22 @@ const Category = (props) => {
       }
 
       return (
-        <Dropdown key={element[0]}>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-            {element[0]}
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            {items}
-          </Dropdown.Menu>
-        </Dropdown>
+        <DropdownButton key={element[0]} variant="dark" as={ButtonGroup} title={element[0]} id="dropdown-basic">
+          {items}
+        </DropdownButton>
       )
     }
     else {
       return (
-        <Dropdown key={element[0]} className="removeArrow">
-            <Dropdown.Item key={element[0]} onClick={()=>props.querySelection(element[0])}>{element[0]}</Dropdown.Item>
-        </Dropdown>
+        <Button key={element[0]} variant="dark" onClick={()=>props.querySelection(element[0])}>{element[0]}</Button>
       )
     }
   })
 
   return (
-    <ul>
+    <ButtonGroup>
       {displayCategory}
-    </ul>
+    </ButtonGroup>
   )
 }
 

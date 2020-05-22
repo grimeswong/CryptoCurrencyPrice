@@ -1,28 +1,23 @@
-ul {
+.category-wrapper {
   display: flex;
-  list-style-type: none;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  &::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: black;
-    border-radius: 15px;
-  }
-  &::-webkit-scrollbar-track {
-    background: $gold;
-  }
+  justify-content: left;
 
-  li {
-    padding: 5px 10px 15px;
+  .group {
+    border-color: $black;
   }
-}
-
-.removeArrow {
-  .dropdown-toggle::after {
-    display:none;
+  button {
+    background-color: $black;
+    border: 0px none transparent;
+    border-radius: 0px;
+    transition: 0.5s;
+    &:hover, &:focus, &:active{
+      background-color: $gold;
+      opacity: 0.7;
+    }
+  }
+  div a {
+    &:hover, &:focus, &:active{
+      background-color: $gold;
+    }
   }
 }
