@@ -43,27 +43,30 @@ class App extends Component {
   }
 
   reconnectServer = () => {
-    setTimeout(this.connectServer, 5000); // reconnect server after 3 seconds
+    setTimeout(this.connectServer, 5000); // reconnect server after 5 seconds
   }
 
   websocketListener() {
     // Need to setInterval, otherwise server keep send message for every second
-    // this.ws.onmessage = (message) => {
-    //   console.log("Message received from Server");
-    //   console.log(message);
-    //   // set data to state
-    // }
+    this.ws.onmessage = (message) => {
+      // console.log(message.data);
+      // console.log(typeof(message.data));
+      // set data to state
+      // this.setState({
+      //   dataLoaded: true,
+      //   data: message.data,
+      //   displayData: message.data
+      // })
+    }
 
     // Listeners
     this.ws.onopen = (state) => {
       console.log("connected WebSocket");
-      console.log(this.state.websocketState);
       this.setState({websocketState: !this.state.websocketState});
-      console.log(this.state.websocketState);
     };
 
-    this.ws.close = () => {
-      console.log("Connection is closed");
+    this.ws.onclose = (e) => {
+      console.log(`Connection is closed, wasClean=${e.wasClean}, code=${e.code}`);
       this.setState({websocketState: false})
     };
 
