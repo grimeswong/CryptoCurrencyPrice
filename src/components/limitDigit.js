@@ -13,7 +13,7 @@ const limitDigit = (num, fixedDigit) => {
       temp = fixedNum.toString().replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1');
     }
     // console.log(`temp=${temp}`);
-    console.log(parseFloat(num)===parseFloat(temp) ? "Same" : "Wrong............................")
+    // console.log(parseFloat(num)===parseFloat(temp) ? "Same" : "Wrong............................")
     return temp;
 }
 
