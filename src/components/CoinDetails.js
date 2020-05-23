@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import limitDigit from './limitDigit.js';
 
 const CoinDetails = (props) => {
-
   const [sortType] = useState(props.sortType);
 
   // function for sorting data by providing symbol
@@ -15,23 +15,13 @@ const CoinDetails = (props) => {
     }
   }
 
-  // function to limit to 8 decimal points and remove unused zero after decimal point
-  const limitDigit = (num, fixedDigit) => {
-    // console.log(num);
-    let fixedNum = num.toFixed(fixedDigit);
-    let temp = fixedNum.toString().replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1');
-    // console.log(temp);
-    // console.log(parseFloat(num)===parseFloat(temp) ? "YEAH" : "Wrong............................")
-    return temp;
-  }
-
-
   // Confirm the data is loaded, otherwise return null
   if(!props.dataLoaded) {return null}
 
   const sortedData = props.data.sort(sortData);
 
   return sortedData.map((element) => {
+    // console.log(element);
     return (
         <tr key={element.s}>
           <td>{`${element.b}/${element.q}`}</td>
