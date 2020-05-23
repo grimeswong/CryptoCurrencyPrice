@@ -13,9 +13,8 @@ class App extends Component {
       sortType: "q",
       searchStr: "",
       displayData: [],
-      websocket: "",
-      websocketData: [],
-      websocketState: ""
+      websocketState: false,
+      websocketData: []
     }
   }
 
@@ -23,26 +22,22 @@ class App extends Component {
   ws = new WebSocket('wss://stream.binance.com/stream?streams=!miniTicker@arr');
 
   componentDidMount() {
-    this.connectWS(this.ws, "open");
+    this.websocketListener();
     this.callAPI();
   }
 
-  connectWS(control) {
-    if(control==="open") {
+  connectServer = () => {
+    console.log("Reconnect server!!!");
+    this.ws = new WebSocket('wss://stream.binance.com/stream?streams=!miniTicker@arr');
+    this.websocketListener();
+  }
 
-    }
+  closeServer = () => {
+    console.log("Close button clicked");
+    this.ws.close();
+  }
 
-    if(control==="close") {
-      console.log("Connection is closing");
-      this.ws.close();  //close the connection
-    }
-
-    this.ws.onopen = (state) => {
-      console.log("connected WebSocket");
-      console.log(state);
-      this.setState({websocketState: "open"});
-    }
-
+  websocketListener() {
     // Need to setInterval, otherwise server keep send message for every second
     // this.ws.onmessage = (message) => {
     //   console.log("Message received from Server");
@@ -51,21 +46,25 @@ class App extends Component {
     // }
 
     // Listeners
+    this.ws.onopen = (state) => {
+      console.log("connected WebSocket");
+      console.log(this.state.websocketState);
+      this.setState({websocketState: !this.state.websocketState});
+      console.log(this.state.websocketState);
+    };
+
     this.ws.close = () => {
       console.log("Connection is closed");
-      this.setState({websocketState: "closed"});
+      this.setState({websocketState: false});
     };
 
     this.ws.onerror = (err) => {
       console.err("Socket encoutered error ", err.message, "Closing socket");
       this.ws.close();
-    }
+      this.setState({websocketState: false});
+    };
   }
 
-  closeConnection = () => {
-    console.log("Close button clicked");
-    this.connectWS("close");
-  }
 
   callAPI() {
     fetch(`/exchange-api/v1/public/asset-service/product/get-products`)
@@ -108,8 +107,8 @@ class App extends Component {
       <main className="App">
         <div className="container">
           <h1>Cryptocurrency Price</h1>
-          <h2>Websocket status: {this.state.websocketState}</h2>
-          <button onClick={this.closeConnection}>Close Connect</button>
+          <h2>Server Connection: {this.state.websocketState ? "connected" : "disconnected"}</h2>
+          <button className="btn btn-light" onClick={this.state.websocketState ? this.closeServer : this.connectServer }>{!this.state.websocketState ? "connect" : "close connection"}</button>
           <div className="section category-wrapper col-sm-12">
             <Category data={this.state.data} querySelection={this.querySelection}/>
           </div>
