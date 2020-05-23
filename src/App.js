@@ -26,6 +26,10 @@ class App extends Component {
     this.callAPI();
   }
 
+  componentWillUnmount() {
+    this.closeServer();
+  }
+
   connectServer = () => {
     console.log("Reconnect server!!!");
     this.ws = new WebSocket('wss://stream.binance.com/stream?streams=!miniTicker@arr');
