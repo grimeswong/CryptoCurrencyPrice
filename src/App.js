@@ -12,12 +12,59 @@ class App extends Component {
       data: [],
       sortType: "q",
       searchStr: "",
-      displayData: []
+      displayData: [],
+      websocket: "",
+      websocketData: [],
+      websocketState: ""
     }
   }
 
+  // property of this class
+  ws = new WebSocket('wss://stream.binance.com/stream?streams=!miniTicker@arr');
+
   componentDidMount() {
+    this.connectWS(this.ws, "open");
     this.callAPI();
+  }
+
+  connectWS(control) {
+    if(control==="open") {
+
+    }
+
+    if(control==="close") {
+      console.log("Connection is closing");
+      this.ws.close();  //close the connection
+    }
+
+    this.ws.onopen = (state) => {
+      console.log("connected WebSocket");
+      console.log(state);
+      this.setState({websocketState: "open"});
+    }
+
+    // Need to setInterval, otherwise server keep send message for every second
+    // this.ws.onmessage = (message) => {
+    //   console.log("Message received from Server");
+    //   console.log(message);
+    //   // set data to state
+    // }
+
+    // Listeners
+    this.ws.close = () => {
+      console.log("Connection is closed");
+      this.setState({websocketState: "closed"});
+    };
+
+    this.ws.onerror = (err) => {
+      console.err("Socket encoutered error ", err.message, "Closing socket");
+      this.ws.close();
+    }
+  }
+
+  closeConnection = () => {
+    console.log("Close button clicked");
+    this.connectWS("close");
   }
 
   callAPI() {
@@ -61,6 +108,8 @@ class App extends Component {
       <main className="App">
         <div className="container">
           <h1>Cryptocurrency Price</h1>
+          <h2>Websocket status: {this.state.websocketState}</h2>
+          <button onClick={this.closeConnection}>Close Connect</button>
           <div className="section category-wrapper col-sm-12">
             <Category data={this.state.data} querySelection={this.querySelection}/>
           </div>
