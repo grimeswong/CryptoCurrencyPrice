@@ -39,7 +39,7 @@ class App extends Component {
 
   closeServer = () => {
     console.log("Close button clicked");
-    this.ws.close();
+    this.ws.close(1000, "Force to disconnet handshake for this App");
   }
 
   reconnectServer = () => {
