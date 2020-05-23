@@ -14,7 +14,8 @@ class App extends Component {
       searchStr: "",
       displayData: [],
       websocketState: false,
-      websocketData: []
+      websocketData: [],
+      intervalID: ""
     }
   }
 
@@ -41,6 +42,10 @@ class App extends Component {
     this.ws.close();
   }
 
+  reconnectServer = () => {
+    setTimeout(this.connectServer, 5000); // reconnect server after 3 seconds
+  }
+
   websocketListener() {
     // Need to setInterval, otherwise server keep send message for every second
     // this.ws.onmessage = (message) => {
@@ -59,16 +64,18 @@ class App extends Component {
 
     this.ws.close = () => {
       console.log("Connection is closed");
-      this.setState({websocketState: false});
+      this.setState({websocketState: false})
     };
 
     this.ws.onerror = (err) => {
-      console.err("Socket encoutered error ", err.message, "Closing socket");
+      console.error(`Socket encoutered error ${err} Closing socket`);
       this.ws.close();
-      this.setState({websocketState: false});
-    };
+      this.setState(
+        {websocketState: false},
+        this.reconnectServer
+      );
+    }
   }
-
 
   callAPI() {
     fetch(`/exchange-api/v1/public/asset-service/product/get-products`)
