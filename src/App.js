@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './styles/main.scss';
 import Category from './components/Category.js';
 import CoinDetails from './components/CoinDetails.js';
+import updateDetails from './components/updateDetails.js';
 
 class App extends Component {
 
@@ -38,7 +39,7 @@ class App extends Component {
   }
 
   closeServer = () => {
-    console.log("Close button clicked");
+    console.log("Close server called");
     this.ws.close(1000, "Force to disconnet handshake for this App");
   }
 
@@ -49,13 +50,17 @@ class App extends Component {
   websocketListener() {
     // Need to setInterval, otherwise server keep send message for every second
     this.ws.onmessage = (message) => {
-      // console.log(message.data);
-      // console.log(typeof(message.data));
-      // set data to state
+      // console.log(JSON.parse(message.data));
+      const remove = JSON.parse(message.data);
+      delete remove.stream;
+      console.log(remove.data);
+      updateDetails(remove.data);
+
+      // update the symbol according these data
       // this.setState({
       //   dataLoaded: true,
-      //   data: message.data,
-      //   displayData: message.data
+      //   data: remove.data,
+      //   displayData: remove.data
       // })
     }
 
