@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, DropdownButton, ButtonGroup, Button } from 'react-bootstrap';
 
 const Category = (props) => {
 
@@ -15,7 +15,7 @@ const Category = (props) => {
     types[typeName].push(props.data[i].q);
   }
 
-  console.log(types); //debugger
+  // console.log(types); //debugger
 
   // Remove duplicate elements in group
   const sortedCategories = [];
@@ -26,7 +26,7 @@ const Category = (props) => {
     sortedCategories.push([type,...groups.sort()]);
   }
 
-  console.log(sortedCategories); //debugger
+  // console.log(sortedCategories); //debugger
 
   // Sort the Categories by number of its symbols
   // function for sorting data by providing symbol
@@ -40,7 +40,8 @@ const Category = (props) => {
     }
   }
 
-  console.log(sortedCategories.sort(sortData));
+  // Sorting array by its first element (symbol or the category)
+  sortedCategories.sort(sortData);
 
   // Load the Category list and with button groups
   const displayCategory = sortedCategories.map((element) => {
@@ -48,36 +49,26 @@ const Category = (props) => {
 
       const items = [];
       for (let i=1; i<element.length; i++) {
-        items.push(<Dropdown.Item key={element[i]} href="#/action-1">{element[i]}</Dropdown.Item>)
+        items.push(<Dropdown.Item key={element[i]} onClick={()=>props.querySelection(element[i])}>{element[i]}</Dropdown.Item>)
       }
 
       return (
-        <Dropdown key={element[0]}>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-            {element[0]}
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            {items}
-          </Dropdown.Menu>
-        </Dropdown>
+        <DropdownButton key={element[0]} variant="dark" as={ButtonGroup} title={element[0]} id="dropdown-basic">
+          {items}
+        </DropdownButton>
       )
     }
     else {
       return (
-        <Dropdown key={element[0]} className="removeArrow">
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-            {element[0]}
-          </Dropdown.Toggle>
-        </Dropdown>
+        <Button key={element[0]} variant="dark" onClick={()=>props.querySelection(element[0])}>{element[0]}</Button>
       )
     }
   })
 
   return (
-    <ul>
+    <ButtonGroup>
       {displayCategory}
-    </ul>
+    </ButtonGroup>
   )
 }
 

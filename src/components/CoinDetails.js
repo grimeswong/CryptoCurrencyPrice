@@ -15,6 +15,17 @@ const CoinDetails = (props) => {
     }
   }
 
+  // function to limit to 8 decimal points and remove unused zero after decimal point
+  const limitDigit = (num, fixedDigit) => {
+    // console.log(num);
+    let fixedNum = num.toFixed(fixedDigit);
+    let temp = fixedNum.toString().replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1');
+    // console.log(temp);
+    // console.log(parseFloat(num)===parseFloat(temp) ? "YEAH" : "Wrong............................")
+    return temp;
+  }
+
+
   // Confirm the data is loaded, otherwise return null
   if(!props.dataLoaded) {return null}
 
@@ -24,7 +35,7 @@ const CoinDetails = (props) => {
     return (
         <tr key={element.s}>
           <td>{`${element.b}/${element.q}`}</td>
-          <td>{element.c}</td>
+          <td>{limitDigit((element.c),8)}</td>
           <td className={parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2) >= 0 ? "positive" : "negative"}>
             {`${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2) >= 0 ? "+" : ""}${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2)}%`}
           </td>
