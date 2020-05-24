@@ -2,9 +2,8 @@
 import limitDigit from './limitDigit.js';
 
 const updateDetails = (array) => {
-  const temp = [];
-  array.map((element) => {
-    temp.push({
+  const temp = array.map((element) => {
+    return ({
       E:element.E,
       s:element.s,
       c:limitDigit(element.c, 8),
@@ -15,7 +14,7 @@ const updateDetails = (array) => {
       v:limitDigit(element.v, 8)
     })
   })
-  console.log(temp);
+  console.log(temp);  // debugger: display the result of processed data
   return temp;
 }
 
