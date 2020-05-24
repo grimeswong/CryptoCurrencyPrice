@@ -10,17 +10,15 @@
 
 // Global Reset / Base
 @import './_agent-reset.css';
-@import './_base.scss';
+@import './base.scss';
 
 // Components
 @import './app.scss';
-// @import './preloader.scss';
-@import './Category.scss';
-@import './CoinDetails.scss';
+@import './category.scss';
+@import './coinDetails.scss';
 
 // Layout
-// @import './footer.scss';
 @import './mobile.scss';
 
 // Vendors
-@import './_bootstrap.scss';
+@import './bootstrap.scss';
