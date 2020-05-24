@@ -2,8 +2,6 @@
 // this fucntion allows the type of string and number as argument
 
 const limitDigit = (num, fixedDigit) => {
-    // console.log(`num=${num}, fixedDigit={fixedDigit}`);
-    // console.log(`typeof=${typeof(num)}`);
     let fixedNum, temp;
     if(typeof(num)==="number") {
       fixedNum = num.toFixed(fixedDigit);
@@ -12,8 +10,6 @@ const limitDigit = (num, fixedDigit) => {
       fixedNum = parseFloat(num).toFixed(fixedDigit);
       temp = fixedNum.toString().replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1');
     }
-    // console.log(`temp=${temp}`);
-    // console.log(parseFloat(num)===parseFloat(temp) ? "Same" : "Wrong............................")
     return temp;
 }
 

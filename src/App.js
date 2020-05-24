@@ -39,7 +39,6 @@ class App extends Component {
   }
 
   closeServer = () => {
-    console.log("Close server called");   // debugger:
     this.ws.close(1000, "Force to disconnet handshake for this App");
   }
 
@@ -48,15 +47,13 @@ class App extends Component {
   }
 
   updateDetails = (newUpdateData) => {
-    let data = [...this.state.data];  // 1. shallow copy of the current database
-    newUpdateData.map((element) => {  // return a value in arrow function
-      let foundObj = data.find((foundElement) => { // 2. find the object[key: s] of old data
+    let data = [...this.state.data];
+    newUpdateData.map((element) => {
+      let foundObj = data.find((foundElement) => {
         return foundElement.s === element.s;
       })
-      // console.log(foundObj);    // debugger:
-      // console.log(element);     // debugger:
       if(foundObj !== undefined || typeof foundObj !== "undefined") {
-        foundObj.c = element.c;   // 3. replace the updated symbol's details
+        foundObj.c = element.c;
         foundObj.h = element.h;
         foundObj.l = element.l;
         foundObj.o = element.o;
@@ -64,22 +61,19 @@ class App extends Component {
       }
     })
 
-    // Update the symbol according these data
+    // Update the database with the updated symbol's details
     this.setState(
       { dataLoaded: true,
         data: data
       }, this.updateList(this.state.searchState==="search"?this.state.searchStr:this.state.searchState), // keep the current search screen (selection of buttons or search result)
     );
-    // console.log("data has been update!!!")    // debugger:
     return null;
   }
 
   websocketListener() {
     this.ws.onmessage = (message) => {
-      // console.log(JSON.parse(message.data));   // debugger
       const trimmedData = JSON.parse(message.data);
       delete trimmedData.stream; // delete the unused column
-      // console.log(trimmedData.data);    // debugger:
       this.updateDetails(processUpdateDetails(trimmedData.data));
     }
 
@@ -142,9 +136,6 @@ class App extends Component {
   }
 
   render() {
-
-    // if(this.state.dataLoaded === true) {console.log(this.state.data)} // debugger: the first render hasn't got the data yet
-
     return(
       <main className="App">
         <div className="container">

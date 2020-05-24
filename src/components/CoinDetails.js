@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import limitDigit from './limitDigit.js';
 
 const CoinDetails = (props) => {
-  // console.log(props);   // debugger:
   const [sortType] = useState(props.sortType);
 
-  // function for sorting data by providing symbol
+  // Function for sorting data by providing symbol
   const sortData = (a, b) => {
     if(a[sortType] < b[sortType]){
       return -1;
@@ -17,10 +16,10 @@ const CoinDetails = (props) => {
   }
 
   // Confirm the data is loaded, otherwise return null
-  if(props.data === "" || props.data ==="undefined") {return null} else {
-
+  if(props.data === "" || props.data ==="undefined") {
+    return null;
+  } else {
     const sortedData = props.data.sort(sortData);
-
     return sortedData.map((element) => {
       return (
         <tr key={element.s}>
@@ -33,8 +32,6 @@ const CoinDetails = (props) => {
       )
     });
   }
-
-
 }
 
 export default CoinDetails;
