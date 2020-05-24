@@ -49,18 +49,19 @@ class App extends Component {
 
   updateDetails = (newUpdateData) => {
     let data = [...this.state.data];  // 1. shallow copy of the current database
-    newUpdateData.map((element) => {
+    newUpdateData.map((element) => {  // return a value in arrow function
       let foundObj = data.find((foundElement) => { // 2. find the object[key: s] of old data
         return foundElement.s === element.s;
       })
       // console.log(foundObj);    // debugger:
       // console.log(element);     // debugger:
-      foundObj.c = element.c;   // 3. replace the updated symbol's details
-      foundObj.h = element.h;
-      foundObj.l = element.l;
-      foundObj.o = element.o;
-      foundObj.v = element.v;
-      // console.log(foundObj);    // debugger:
+      if(foundObj !== undefined || typeof foundObj !== "undefined") {
+        foundObj.c = element.c;   // 3. replace the updated symbol's details
+        foundObj.h = element.h;
+        foundObj.l = element.l;
+        foundObj.o = element.o;
+        foundObj.v = element.v;
+      }
     })
 
     // Update the symbol according these data
@@ -70,7 +71,7 @@ class App extends Component {
       }, this.updateList(this.state.searchState==="search"?this.state.searchStr:this.state.searchState), // keep the current search screen (selection of buttons or search result)
     );
     // console.log("data has been update!!!")    // debugger:
-    return null
+    return null;
   }
 
   websocketListener() {
@@ -123,12 +124,10 @@ class App extends Component {
 
   updateList(str) {
     if(str === "") {
-      console.log("empty string");
       this.setState({
         displayData: this.state.data
       })
     } else {
-      console.log("with string");
       this.setState({
         displayData: this.state.data.filter((element) => element.q === str.toUpperCase() || element.b === str.toUpperCase())
       })
