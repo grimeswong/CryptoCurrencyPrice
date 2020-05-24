@@ -25,7 +25,7 @@ class App extends Component {
 
   componentDidMount() {
     this.callAPI();
-    this.websocketListener();
+    // this.websocketListener();
   }
 
   componentWillUnmount() {
@@ -49,7 +49,7 @@ class App extends Component {
 
   updateDetails = (newUpdateData) => {
     let data = [...this.state.data];  // 1. shallow copy of the current database
-    newUpdateData.map((element) => {
+    return newUpdateData.map((element) => {
       let foundObj = data.find((foundElement) => { // 2. find the object[key: s] of old data
         return foundElement.s === element.s;
       })
@@ -130,11 +130,10 @@ class App extends Component {
     }
   }
 
-  async updateInput(e) {
-    await this.setState({
+  updateInput(e) {
+    this.setState({
       searchStr: e.target.value
-    })
-    this.updateList(this.state.searchStr);
+    }, this.updateList(e.target.value));
   }
 
   render() {
@@ -152,7 +151,7 @@ class App extends Component {
           </div>
           <div className="section selection-wrapper">
             <div className="search-wrapper col-sm-6">
-              <input className="form-control" type="text" placeholder="Search" aria-label="Search" onChange={(e) => this.updateInput(e)} value={this.state.searchStr}/>
+              <input className="form-control" type="text" placeholder="Search" aria-label="Search" onChange={(e)=>this.updateInput(e)} value={this.state.searchStr}/>
             </div>
             <div className="form-wrapper col-sm-6">
               <div className="form-check form-check-inline">

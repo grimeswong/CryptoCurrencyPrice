@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import limitDigit from './limitDigit.js';
 
 const CoinDetails = (props) => {
-  console.log(props);   // debugger: 
+  // console.log(props);   // debugger: 
   const [sortType] = useState(props.sortType);
 
   // function for sorting data by providing symbol
