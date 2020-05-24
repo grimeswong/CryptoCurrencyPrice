@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './styles/main.scss';
 import Category from './components/Category.js';
 import CoinDetails from './components/CoinDetails.js';
-import updateDetails from './components/updateDetails.js';
+import processUpdateDetails from './components/processUpdateDetails.js';
 
 class App extends Component {
 
@@ -24,8 +24,8 @@ class App extends Component {
   ws = new WebSocket('wss://stream.binance.com/stream?streams=!miniTicker@arr');
 
   componentDidMount() {
-    this.websocketListener();
     this.callAPI();
+    this.websocketListener();
   }
 
   componentWillUnmount() {
@@ -33,13 +33,13 @@ class App extends Component {
   }
 
   connectServer = () => {
-    console.log("Reconnect server!!!");
+    console.log("Reconnecting server!!!");   // logger:
     this.ws = new WebSocket('wss://stream.binance.com/stream?streams=!miniTicker@arr');
     this.websocketListener();
   }
 
   closeServer = () => {
-    console.log("Close server called");
+    console.log("Close server called");   // debugger:
     this.ws.close(1000, "Force to disconnet handshake for this App");
   }
 
@@ -47,36 +47,55 @@ class App extends Component {
     setTimeout(this.connectServer, 5000); // reconnect server after 5 seconds
   }
 
-  websocketListener() {
-    // Need to setInterval, otherwise server keep send message for every second
-    this.ws.onmessage = (message) => {
-      // console.log(JSON.parse(message.data));
-      const remove = JSON.parse(message.data);
-      delete remove.stream;
-      console.log(remove.data);
-      updateDetails(remove.data);
+  updateDetails = (newUpdateData) => {
+    let data = [...this.state.data];  // 1. shallow copy of the current database
+    newUpdateData.map((element) => {
+      let foundObj = data.find((foundElement) => { // 2. find the object[key: s] of old data
+        return foundElement.s === element.s;
+      })
+      console.log(foundObj);    // debugger:
+      console.log(element);     // debugger:
+      foundObj.s = element.s;   // 3. replace the updated symbol's details
+      foundObj.c = element.c;
+      foundObj.h = element.h;
+      foundObj.l = element.l;
+      foundObj.o = element.o;
+      foundObj.v = element.v;
+      console.log(foundObj);    // debugger:
+    })
 
-      // update the symbol according these data
-      // this.setState({
-      //   dataLoaded: true,
-      //   data: remove.data,
-      //   displayData: remove.data
-      // })
+    // Update the symbol according these data
+    this.setState(
+      { dataLoaded: true,
+        data: data,
+        displayData: data
+      },
+      console.log("data has been update!!!")    // debugger:
+    );
+  }
+
+  websocketListener() {
+    this.ws.onmessage = (message) => {
+      // console.log(JSON.parse(message.data));   // debugger
+      const trimmedData = JSON.parse(message.data);
+      delete trimmedData.stream; // delete the unused column
+      console.log(trimmedData.data);    // debugger:
+      this.updateDetails(processUpdateDetails(trimmedData.data));
     }
 
     // Listeners
     this.ws.onopen = (state) => {
-      console.log("connected WebSocket");
+      console.log("connected WebSocket");   //logger
       this.setState({websocketState: !this.state.websocketState});
     };
 
     this.ws.onclose = (e) => {
-      console.log(`Connection is closed, wasClean=${e.wasClean}, code=${e.code}`);
+      console.log(`Connection is closed, wasClean=${e.wasClean}, code=${e.code}`);    //logger
       this.setState({websocketState: false})
     };
 
     this.ws.onerror = (err) => {
-      console.error(`Socket encoutered error ${err} Closing socket`);
+      console.error(`Socket encoutered error ${err} Closing socket`);     //logger
       this.ws.close();
       this.setState(
         {websocketState: false},

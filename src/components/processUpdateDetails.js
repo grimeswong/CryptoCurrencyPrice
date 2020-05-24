@@ -4,7 +4,6 @@ import limitDigit from './limitDigit.js';
 const processUpdateDetails = (array) => {
   const temp = array.map((element) => {
     return ({
-      E:element.E,
       s:element.s,
       c:limitDigit(element.c, 8),
       h:limitDigit(element.h, 8),
