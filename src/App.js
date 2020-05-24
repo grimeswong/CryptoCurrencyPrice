@@ -149,8 +149,10 @@ class App extends Component {
       <main className="App">
         <div className="container">
           <h1>Cryptocurrency Price</h1>
-          <h2>Server Connection: {this.state.websocketState ? "connected" : "disconnected"}</h2>
-          <button className="btn btn-light" onClick={this.state.websocketState ? this.closeServer : this.connectServer }>{!this.state.websocketState ? "connect" : "close connection"}</button>
+          <div className="connection-wrapper">
+            <p>status: <span className={this.state.websocketState? "connected" : "disconnected"}>{this.state.websocketState ? "connected" : "disconnected"}</span></p>
+            <button className="btn btn-light" onClick={this.state.websocketState ? this.closeServer : this.connectServer }>{!this.state.websocketState ? "connect" : "close"}</button>
+          </div>
           <div className="section category-wrapper col-sm-12">
             <Category data={this.state.data} querySelection={this.querySelection}/>
           </div>
