@@ -12,7 +12,7 @@ const processUpdateDetails = (array) => {
       v:limitDigit(element.v, 8)
     })
   })
-  console.log(temp);  // debugger: display the result of processed data
+  // console.log(temp);  // debugger: display the result of processed data
   return temp;
 }
 

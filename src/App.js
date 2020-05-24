@@ -13,10 +13,10 @@ class App extends Component {
       data: [],
       sortType: "q",
       searchStr: "",
+      searchState: "search",
       displayData: [],
       websocketState: false,
       websocketData: [],
-      intervalID: ""
     }
   }
 
@@ -25,7 +25,7 @@ class App extends Component {
 
   componentDidMount() {
     this.callAPI();
-    // this.websocketListener();
+    this.websocketListener();
   }
 
   componentWillUnmount() {
@@ -49,29 +49,28 @@ class App extends Component {
 
   updateDetails = (newUpdateData) => {
     let data = [...this.state.data];  // 1. shallow copy of the current database
-    return newUpdateData.map((element) => {
+    newUpdateData.map((element) => {
       let foundObj = data.find((foundElement) => { // 2. find the object[key: s] of old data
         return foundElement.s === element.s;
       })
-      console.log(foundObj);    // debugger:
-      console.log(element);     // debugger:
-      foundObj.s = element.s;   // 3. replace the updated symbol's details
-      foundObj.c = element.c;
+      // console.log(foundObj);    // debugger:
+      // console.log(element);     // debugger:
+      foundObj.c = element.c;   // 3. replace the updated symbol's details
       foundObj.h = element.h;
       foundObj.l = element.l;
       foundObj.o = element.o;
       foundObj.v = element.v;
-      console.log(foundObj);    // debugger:
+      // console.log(foundObj);    // debugger:
     })
 
     // Update the symbol according these data
     this.setState(
       { dataLoaded: true,
-        data: data,
-        displayData: data
-      },
-      console.log("data has been update!!!")    // debugger:
+        data: data
+      }, this.updateList(this.state.searchState==="search"?this.state.searchStr:this.state.searchState), // keep the current search screen (selection of buttons or search result)
     );
+    // console.log("data has been update!!!")    // debugger:
+    return null
   }
 
   websocketListener() {
@@ -79,7 +78,7 @@ class App extends Component {
       // console.log(JSON.parse(message.data));   // debugger
       const trimmedData = JSON.parse(message.data);
       delete trimmedData.stream; // delete the unused column
-      console.log(trimmedData.data);    // debugger:
+      // console.log(trimmedData.data);    // debugger:
       this.updateDetails(processUpdateDetails(trimmedData.data));
     }
 
@@ -115,15 +114,21 @@ class App extends Component {
   }
 
   querySelection = (symbol) => {
-    this.updateList(symbol);
+    this.setState({
+      searchStr: "",
+      searchState: symbol
+    }, this.updateList(symbol))
+
   }
 
   updateList(str) {
     if(str === "") {
+      console.log("empty string");
       this.setState({
         displayData: this.state.data
       })
     } else {
+      console.log("with string");
       this.setState({
         displayData: this.state.data.filter((element) => element.q === str.toUpperCase() || element.b === str.toUpperCase())
       })
@@ -132,8 +137,9 @@ class App extends Component {
 
   updateInput(e) {
     this.setState({
-      searchStr: e.target.value
-    }, this.updateList(e.target.value));
+      searchStr: e.target.value,
+      searchState: "search"
+    }, this.updateList(this.state.searchStr));
   }
 
   render() {
