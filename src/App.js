@@ -79,17 +79,17 @@ class App extends Component {
 
     // Listeners
     this.ws.onopen = (state) => {
-      console.log("connected WebSocket");   //logger
+      console.log("Connected Server!!!");   //logger
       this.setState({websocketState: !this.state.websocketState});
     };
 
     this.ws.onclose = (e) => {
-      console.log(`Connection is closed, wasClean=${e.wasClean}, code=${e.code}`);    //logger
+      console.log(`Connection is closed, wasClean=${e.wasClean}, code=${e.code}!!!`);    //logger
       this.setState({websocketState: false})
     };
 
     this.ws.onerror = (err) => {
-      console.error(`Socket encoutered error ${err} Closing socket`);     //logger
+      console.error(`Connection encountered error ${err}, closing connection!!!`);     //logger
       this.ws.close();
       this.setState(
         {websocketState: false},
