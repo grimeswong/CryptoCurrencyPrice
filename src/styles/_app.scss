@@ -18,6 +18,25 @@ html {
     padding: 1rem 0px;
   }
 
+  .connection-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    p {
+      margin: 0;
+      padding: 0 5px;
+      .connected {
+        color: green;
+      }
+      .disconnected {
+        color: red;
+      }
+    }
+    button {
+      min-width: 85px;
+    }
+  }
+
   .category-wrapper {
     width: 100%;
   }

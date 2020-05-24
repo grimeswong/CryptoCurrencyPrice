@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import limitDigit from './limitDigit.js';
 
 const CoinDetails = (props) => {
-
   const [sortType] = useState(props.sortType);
 
-  // function for sorting data by providing symbol
+  // Function for sorting data by providing symbol
   const sortData = (a, b) => {
     if(a[sortType] < b[sortType]){
       return -1;
@@ -15,24 +15,13 @@ const CoinDetails = (props) => {
     }
   }
 
-  // function to limit to 8 decimal points and remove unused zero after decimal point
-  const limitDigit = (num, fixedDigit) => {
-    // console.log(num);
-    let fixedNum = num.toFixed(fixedDigit);
-    let temp = fixedNum.toString().replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1');
-    // console.log(temp);
-    // console.log(parseFloat(num)===parseFloat(temp) ? "YEAH" : "Wrong............................")
-    return temp;
-  }
-
-
   // Confirm the data is loaded, otherwise return null
-  if(!props.dataLoaded) {return null}
-
-  const sortedData = props.data.sort(sortData);
-
-  return sortedData.map((element) => {
-    return (
+  if(props.data === "" || props.data ==="undefined") {
+    return null;
+  } else {
+    const sortedData = props.data.sort(sortData);
+    return sortedData.map((element) => {
+      return (
         <tr key={element.s}>
           <td>{`${element.b}/${element.q}`}</td>
           <td>{limitDigit((element.c),8)}</td>
@@ -40,9 +29,9 @@ const CoinDetails = (props) => {
             {`${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2) >= 0 ? "+" : ""}${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2)}%`}
           </td>
         </tr>
-    )
-  });
-
+      )
+    });
+  }
 }
 
 export default CoinDetails;
