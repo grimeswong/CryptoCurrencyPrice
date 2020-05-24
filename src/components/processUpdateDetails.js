@@ -1,7 +1,7 @@
 // This function is for convert correct format prior to updating the symbols details to the current one
 import limitDigit from './limitDigit.js';
 
-const updateDetails = (array) => {
+const processUpdateDetails = (array) => {
   const temp = array.map((element) => {
     return ({
       E:element.E,
@@ -18,4 +18,4 @@ const updateDetails = (array) => {
   return temp;
 }
 
-export default updateDetails;
+export default processUpdateDetails;
