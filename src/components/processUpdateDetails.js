@@ -10,7 +10,6 @@ const processUpdateDetails = (array) => {
       h:limitDigit(element.h, 8),
       l:limitDigit(element.l, 8),
       o:limitDigit(element.o, 8),
-      q:limitDigit(element.q, 8),
       v:limitDigit(element.v, 8)
     })
   })
