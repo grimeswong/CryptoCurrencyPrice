@@ -134,7 +134,7 @@ class App extends Component {
           </div>
           <div className="section selection-wrapper">
             <div className="search-wrapper col-sm-6">
-              <input className="form-control" type="text" placeholder="Search a symbol eg. BTC" aria-label="Search" onChange={(e)=>this.querySelection(e.target.value)} value={this.state.searchStr}/>
+              <input className="form-control" type="text" placeholder="Search a base symbol" aria-label="Search" onChange={(e)=>this.querySelection(e.target.value)} value={this.state.searchStr}/>
             </div>
             <div className="form-wrapper col-sm-6">
               <div className="form-check form-check-inline">
