@@ -155,7 +155,7 @@ class App extends Component {
           <h1>Cryptocurrency Price</h1>
           <div className="connection-wrapper">
             <p>status: <span className={this.state.websocketState? "connected" : "disconnected"}>{this.state.websocketState ? "connected" : "disconnected"}</span></p>
-            <button className="btn btn-light" onClick={this.state.websocketState ? this.closeServer : this.connectServer }>{!this.state.websocketState ? "connect" : "close"}</button>
+            <button className="btn btn-light" onClick={this.state.websocketState ? this.closeServer : this.connectServer }>{!this.state.websocketState ? "connect" : "stop"}</button>
           </div>
           <div className="section category-wrapper col-sm-12">
             <Category data={this.state.data} currentSelection={this.currentSelection}/>
