@@ -58,6 +58,7 @@ class App extends Component {
         foundObj.o = element.o;
         foundObj.v = element.v;
       }
+      return null; // silent the dev tools checker
     })
 
     // Update the database
