@@ -6,6 +6,7 @@ const CoinDetails = (props) => {
   console.log(props.data);  // debugger:
 
   const [sortType] = useState(props.sortType);
+  let filterData = props.data;
 
   // Function for sorting data by providing sorting reference or method (eg. b=base, q=quote)
   const sortData = (a, b) => {
@@ -22,7 +23,11 @@ const CoinDetails = (props) => {
   if(props.data === "" || props.data ==="undefined") {
     return null;
   } else {
-    const sortedData = props.data.sort(sortData);
+    // Filter for categories that selected the current cryptocurrency
+    if(props.currentSelection!=="") {
+      filterData = props.data.filter(element=>element.b===props.currentSelection);
+    }
+    const sortedData = filterData.sort(sortData);
     return sortedData.map((element) => {
       return (
         <tr key={element.s}>

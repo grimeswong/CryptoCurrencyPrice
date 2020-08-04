@@ -115,6 +115,12 @@ class App extends Component {
 
   }
 
+  currentSelection = (currency) => {
+    this.setState({
+      currentSelection: currency
+    })
+  }
+
   updateList(str) {
     // console.log(`this.state.searchStr=${this.state.searchStr}`);
     if(str === "") {
@@ -152,7 +158,7 @@ class App extends Component {
             <button className="btn btn-light" onClick={this.state.websocketState ? this.closeServer : this.connectServer }>{!this.state.websocketState ? "connect" : "close"}</button>
           </div>
           <div className="section category-wrapper col-sm-12">
-            <Category data={this.state.data} querySelection={this.querySelection}/>
+            <Category data={this.state.data} currentSelection={this.currentSelection}/>
           </div>
           <div className="section selection-wrapper">
             <div className="search-wrapper col-sm-6">
