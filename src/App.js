@@ -12,8 +12,7 @@ class App extends Component {
       dataLoaded: false,
       data: [],   // the cryptocurrency data including updated data via web socket
       sortType: "b",
-      searchStr: "",
-      searchState: "search",
+      searchStr: "",    // the current search string in searching box
       currentSelection: "",   // the current selected currency in categories
       websocketState: false,
       websocketData: [],
@@ -25,7 +24,7 @@ class App extends Component {
 
   componentDidMount() {
     this.callAPI();
-    // this.websocketListener();  // disable for avoid data confusion
+    // this.websocketListener();  // disable for default that avoid data confusion
   }
 
   componentWillUnmount() {
@@ -61,13 +60,12 @@ class App extends Component {
       }
     })
 
-    // Update the database with the updated symbol's details
+    // Update the database
     this.setState(
       { dataLoaded: true,
         data: data
-      }, this.updateList(this.state.searchState==="search"?this.state.searchStr:this.state.searchState), // keep the current search screen (selection of buttons or search result)
+      }
     );
-    return null;
   }
 
   websocketListener() {
@@ -107,48 +105,22 @@ class App extends Component {
     }))
   }
 
-  querySelection = (symbol) => {
+  // the current query in searching box
+  querySelection = (string) => {
     this.setState({
-      searchStr: "",
-      searchState: symbol
-    }, this.updateList(symbol))
-
+      searchStr: string
+    })
   }
 
+  // the current selected currency in categories
   currentSelection = (currency) => {
     this.setState({
       currentSelection: currency
     })
   }
 
-  updateList(str) {
-    // console.log(`this.state.searchStr=${this.state.searchStr}`);
-    if(str === "") {
-      console.log("str ===\"\"");
-      this.setState({
-        searchStr: str,
-        searchState: "search",
-        displayData: this.state.data
-      })
-    } else {
-      console.log("not empty");
-      this.setState({
-        searchStr: str,
-        searchState: "search",
-        displayData: this.state.data.filter((element) => element.q === str.toUpperCase() || element.b === str.toUpperCase())
-      })
-    }
-  }
-
-  // updateInput = (e) => {
-  //   this.setState({
-  //     searchStr: e.target.value,
-  //     searchState: "search"
-  //   }, this.updateList(e.target.value));
-  // }
-
   render() {
-    console.log("rendering!!!") // debugger
+    // console.log("rendering!!!") // debugger
     return(
       <main className="App">
         <div className="container">
@@ -162,8 +134,7 @@ class App extends Component {
           </div>
           <div className="section selection-wrapper">
             <div className="search-wrapper col-sm-6">
-              <h2>{this.state.searchStr}</h2> {/* Debugger: for testing typing search keyword */}
-              <input className="form-control" type="text" placeholder="Search a symbol eg. BTC" aria-label="Search" onChange={(e)=>this.updateList(e.target.value)} value={this.state.searchStr}/>
+              <input className="form-control" type="text" placeholder="Search a symbol eg. BTC" aria-label="Search" onChange={(e)=>this.querySelection(e.target.value)} value={this.state.searchStr}/>
             </div>
             <div className="form-wrapper col-sm-6">
               <div className="form-check form-check-inline">
@@ -191,7 +162,12 @@ class App extends Component {
                 </tr>
               </thead>
               <tbody>
-                <CoinList data={this.state.data} currentSelection={this.state.currentSelection} dataLoaded={this.state.dataLoaded} sortType={this.state.sortType}/>
+                <CoinList data={this.state.data}
+                          currentSelection={this.state.currentSelection}
+                          querySelection={this.state.searchStr}
+                          dataLoaded={this.state.dataLoaded}
+                          sortType={this.state.sortType}
+                />
               </tbody>
             </table>
           </div>

@@ -5,7 +5,7 @@ import CoinDetail from './CoinDetail.js';
 
 const CoinList = (props) => {
 
-  console.log(props.data);  // debugger
+  // console.log(props.data);  // debugger
 
   const [sortType] = useState(props.sortType);
   let filterData = props.data;
@@ -29,7 +29,10 @@ const CoinList = (props) => {
     if(props.currentSelection!=="") {
       filterData = props.data.filter(element=>element.q===props.currentSelection);
     }
-    const sortedData = filterData.sort(sortData);
+    // Sorting according the user sorting type
+    // Filter for matching the search keyword if typed, otherwise, the filter will ignore the case
+    // Must change the search string to upper case for matching the base currency 
+    const sortedData = filterData.sort(sortData).filter(element=>element.b.includes(props.querySelection.toUpperCase()));
     return sortedData.map((element) => {
       return (
         <CoinDetail key={element.s} element={element} />
