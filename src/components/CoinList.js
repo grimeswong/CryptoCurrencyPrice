@@ -27,7 +27,7 @@ const CoinList = (props) => {
   } else {
     // Filter for categories that selected the current cryptocurrency
     if(props.currentSelection!=="") {
-      filterData = props.data.filter(element=>element.b===props.currentSelection);
+      filterData = props.data.filter(element=>element.q===props.currentSelection);
     }
     const sortedData = filterData.sort(sortData);
     return sortedData.map((element) => {

@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       dataLoaded: false,
       data: [],   // the cryptocurrency data including updated data via web socket
-      sortType: "q",
+      sortType: "b",
       searchStr: "",
       searchState: "search",
       currentSelection: "",   // the current selected currency in categories
@@ -185,7 +185,7 @@ class App extends Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">Pair (Quote/Base)</th>
+                  <th scope="col">Pair (Base/Quote)</th>
                   <th scope="col">Last Price</th>
                   <th scope="col">Change</th>
                 </tr>
