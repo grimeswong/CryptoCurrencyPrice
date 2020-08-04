@@ -10,11 +10,11 @@ class App extends Component {
     super(props);
     this.state = {
       dataLoaded: false,
-      data: [],
-      sortType: "q",
+      data: [],   // the cryptocurrency data including updated data via web socket
+      sortType: "b",
       searchStr: "",
       searchState: "search",
-      displayData: [],
+      currentSelection: "",   // the current selected currency in categories
       websocketState: false,
       websocketData: [],
     }
@@ -25,7 +25,7 @@ class App extends Component {
 
   componentDidMount() {
     this.callAPI();
-    this.websocketListener();
+    // this.websocketListener();  // disable for avoid data confusion
   }
 
   componentWillUnmount() {
@@ -103,8 +103,7 @@ class App extends Component {
     .then(res => res.json())
     .then(res => this.setState({
           dataLoaded: true,
-          data: res.data,
-          displayData: res.data
+          data: res.data
     }))
   }
 
@@ -117,25 +116,33 @@ class App extends Component {
   }
 
   updateList(str) {
+    // console.log(`this.state.searchStr=${this.state.searchStr}`);
     if(str === "") {
+      console.log("str ===\"\"");
       this.setState({
+        searchStr: str,
+        searchState: "search",
         displayData: this.state.data
       })
     } else {
+      console.log("not empty");
       this.setState({
+        searchStr: str,
+        searchState: "search",
         displayData: this.state.data.filter((element) => element.q === str.toUpperCase() || element.b === str.toUpperCase())
       })
     }
   }
 
-  updateInput(e) {
-    this.setState({
-      searchStr: e.target.value,
-      searchState: "search"
-    }, this.updateList(this.state.searchStr));
-  }
+  // updateInput = (e) => {
+  //   this.setState({
+  //     searchStr: e.target.value,
+  //     searchState: "search"
+  //   }, this.updateList(e.target.value));
+  // }
 
   render() {
+    console.log("rendering!!!")
     return(
       <main className="App">
         <div className="container">
@@ -149,7 +156,8 @@ class App extends Component {
           </div>
           <div className="section selection-wrapper">
             <div className="search-wrapper col-sm-6">
-              <input className="form-control" type="text" placeholder="Search a symbol eg. BTC" aria-label="Search" onChange={(e)=>this.updateInput(e)} value={this.state.searchStr}/>
+              <h2>{this.state.searchStr}</h2> {/* Debugger: for testing typing search keyword */}
+              <input className="form-control" type="text" placeholder="Search a symbol eg. BTC" aria-label="Search" onChange={(e)=>this.updateList(e.target.value)} value={this.state.searchStr}/>
             </div>
             <div className="form-wrapper col-sm-6">
               <div className="form-check form-check-inline">
@@ -171,13 +179,13 @@ class App extends Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">Pair</th>
+                  <th scope="col">Pair (Quote/Base)</th>
                   <th scope="col">Last Price</th>
                   <th scope="col">Change</th>
                 </tr>
               </thead>
               <tbody>
-                <CoinDetails data={this.state.displayData} dataLoaded={this.state.dataLoaded} sortType={this.state.sortType}/>
+                <CoinDetails data={this.state.data} currentSelection={this.state.currentSelection} dataLoaded={this.state.dataLoaded} sortType={this.state.sortType}/>
               </tbody>
             </table>
           </div>

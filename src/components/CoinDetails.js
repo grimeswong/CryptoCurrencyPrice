@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import limitDigit from './limitDigit.js';
 
 const CoinDetails = (props) => {
+
+  console.log(props.data);  // debugger:
+
   const [sortType] = useState(props.sortType);
 
-  // Function for sorting data by providing symbol
+  // Function for sorting data by providing sorting reference or method (eg. b=base, q=quote)
   const sortData = (a, b) => {
     if(a[sortType] < b[sortType]){
       return -1;
@@ -23,7 +26,7 @@ const CoinDetails = (props) => {
     return sortedData.map((element) => {
       return (
         <tr key={element.s}>
-          <td>{`${element.b}/${element.q}`}</td>
+          <td><span className="coinDetail-quote">{`${element.q}`}</span><span className="coinDetail-base">/{`${element.b}`}</span></td>
           <td>{limitDigit((element.c),8)}</td>
           <td className={parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2) >= 0 ? "positive" : "negative"}>
             {`${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2) >= 0 ? "+" : ""}${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2)}%`}
