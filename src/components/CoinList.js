@@ -1,9 +1,11 @@
+// A component to display the list of cryptocurrency that can apply specified filtering and sorting
+
 import React, { useState } from 'react';
-import limitDigit from './limitDigit.js';
+import CoinDetail from './CoinDetail.js';
 
-const CoinDetails = (props) => {
+const CoinList = (props) => {
 
-  console.log(props.data);  // debugger:
+  console.log(props.data);  // debugger
 
   const [sortType] = useState(props.sortType);
   let filterData = props.data;
@@ -30,16 +32,10 @@ const CoinDetails = (props) => {
     const sortedData = filterData.sort(sortData);
     return sortedData.map((element) => {
       return (
-        <tr key={element.s}>
-          <td><span className="coinDetail-quote">{`${element.q}`}</span><span className="coinDetail-base">/{`${element.b}`}</span></td>
-          <td>{limitDigit((element.c),8)}</td>
-          <td className={parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2) >= 0 ? "positive" : "negative"}>
-            {`${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2) >= 0 ? "+" : ""}${parseFloat(((element.c - element.o) / element.o) * 100).toFixed(2)}%`}
-          </td>
-        </tr>
+        <CoinDetail key={element.s} element={element} />
       )
     });
   }
 }
 
-export default CoinDetails;
+export default CoinList;

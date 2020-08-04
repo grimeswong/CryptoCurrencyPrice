@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles/main.scss';
 import Category from './components/Category.js';
-import CoinDetails from './components/CoinDetails.js';
+import CoinList from './components/CoinList.js';
 import processUpdateDetails from './components/processUpdateDetails.js';
 
 class App extends Component {
@@ -148,7 +148,7 @@ class App extends Component {
   // }
 
   render() {
-    console.log("rendering!!!")
+    console.log("rendering!!!") // debugger
     return(
       <main className="App">
         <div className="container">
@@ -191,7 +191,7 @@ class App extends Component {
                 </tr>
               </thead>
               <tbody>
-                <CoinDetails data={this.state.data} currentSelection={this.state.currentSelection} dataLoaded={this.state.dataLoaded} sortType={this.state.sortType}/>
+                <CoinList data={this.state.data} currentSelection={this.state.currentSelection} dataLoaded={this.state.dataLoaded} sortType={this.state.sortType}/>
               </tbody>
             </table>
           </div>
