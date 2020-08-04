@@ -43,7 +43,7 @@ const Category = (props) => {
 
       const items = [];
       for (let i=1; i<element.length; i++) {
-        items.push(<Dropdown.Item key={element[i]} onClick={()=>props.querySelection(element[i])}>{element[i]}</Dropdown.Item>)
+        items.push(<Dropdown.Item key={element[i]} onClick={()=>props.currentSelection(element[i])}>{element[i]}</Dropdown.Item>)
       }
       return (
         <DropdownButton key={element[0]} variant="dark" as={ButtonGroup} title={element[0]} id="dropdown-basic">
@@ -53,7 +53,7 @@ const Category = (props) => {
     }
     else {
       return (
-        <Button key={element[0]} variant="dark" onClick={()=>props.querySelection(element[0])}>{element[0]}</Button>
+        <Button key={element[0]} variant="dark" onClick={()=>props.currentSelection(element[0])}>{element[0]}</Button>
       )
     }
   })

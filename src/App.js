@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles/main.scss';
 import Category from './components/Category.js';
-import CoinDetails from './components/CoinDetails.js';
+import CoinList from './components/CoinList.js';
 import processUpdateDetails from './components/processUpdateDetails.js';
 
 class App extends Component {
@@ -10,11 +10,10 @@ class App extends Component {
     super(props);
     this.state = {
       dataLoaded: false,
-      data: [],
-      sortType: "q",
-      searchStr: "",
-      searchState: "search",
-      displayData: [],
+      data: [],   // the cryptocurrency data including updated data via web socket
+      sortType: "b",
+      searchStr: "",    // the current search string in searching box
+      currentSelection: "",   // the current selected currency in categories
       websocketState: false,
       websocketData: [],
     }
@@ -25,7 +24,7 @@ class App extends Component {
 
   componentDidMount() {
     this.callAPI();
-    this.websocketListener();
+    // this.websocketListener();  // disable for default that avoid data confusion
   }
 
   componentWillUnmount() {
@@ -59,15 +58,15 @@ class App extends Component {
         foundObj.o = element.o;
         foundObj.v = element.v;
       }
+      return null; // silent the dev tools checker
     })
 
-    // Update the database with the updated symbol's details
+    // Update the database
     this.setState(
       { dataLoaded: true,
         data: data
-      }, this.updateList(this.state.searchState==="search"?this.state.searchStr:this.state.searchState), // keep the current search screen (selection of buttons or search result)
+      }
     );
-    return null;
   }
 
   websocketListener() {
@@ -103,53 +102,40 @@ class App extends Component {
     .then(res => res.json())
     .then(res => this.setState({
           dataLoaded: true,
-          data: res.data,
-          displayData: res.data
+          data: res.data
     }))
   }
 
-  querySelection = (symbol) => {
+  // the current query in searching box
+  querySelection = (string) => {
     this.setState({
-      searchStr: "",
-      searchState: symbol
-    }, this.updateList(symbol))
-
+      searchStr: string
+    })
   }
 
-  updateList(str) {
-    if(str === "") {
-      this.setState({
-        displayData: this.state.data
-      })
-    } else {
-      this.setState({
-        displayData: this.state.data.filter((element) => element.q === str.toUpperCase() || element.b === str.toUpperCase())
-      })
-    }
-  }
-
-  updateInput(e) {
+  // the current selected currency in categories
+  currentSelection = (currency) => {
     this.setState({
-      searchStr: e.target.value,
-      searchState: "search"
-    }, this.updateList(this.state.searchStr));
+      currentSelection: currency
+    })
   }
 
   render() {
+    // console.log("rendering!!!") // debugger
     return(
       <main className="App">
         <div className="container">
-          <h1>Cryptocurrency Price</h1>
+          <h1>Cryptocurrency Portfolio</h1>
           <div className="connection-wrapper">
             <p>status: <span className={this.state.websocketState? "connected" : "disconnected"}>{this.state.websocketState ? "connected" : "disconnected"}</span></p>
-            <button className="btn btn-light" onClick={this.state.websocketState ? this.closeServer : this.connectServer }>{!this.state.websocketState ? "connect" : "close"}</button>
+            <button className="btn btn-light" onClick={this.state.websocketState ? this.closeServer : this.connectServer }>{!this.state.websocketState ? "connect" : "stop"}</button>
           </div>
           <div className="section category-wrapper col-sm-12">
-            <Category data={this.state.data} querySelection={this.querySelection}/>
+            <Category data={this.state.data} currentSelection={this.currentSelection}/>
           </div>
           <div className="section selection-wrapper">
             <div className="search-wrapper col-sm-6">
-              <input className="form-control" type="text" placeholder="Search a symbol eg. BTC" aria-label="Search" onChange={(e)=>this.updateInput(e)} value={this.state.searchStr}/>
+              <input className="form-control" type="text" placeholder="Search a base symbol" aria-label="Search" onChange={(e)=>this.querySelection(e.target.value)} value={this.state.searchStr}/>
             </div>
             <div className="form-wrapper col-sm-6">
               <div className="form-check form-check-inline">
@@ -171,13 +157,18 @@ class App extends Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">Pair</th>
+                  <th scope="col">Pair (Base/Quote)</th>
                   <th scope="col">Last Price</th>
                   <th scope="col">Change</th>
                 </tr>
               </thead>
               <tbody>
-                <CoinDetails data={this.state.displayData} dataLoaded={this.state.dataLoaded} sortType={this.state.sortType}/>
+                <CoinList data={this.state.data}
+                          currentSelection={this.state.currentSelection}
+                          querySelection={this.state.searchStr}
+                          dataLoaded={this.state.dataLoaded}
+                          sortType={this.state.sortType}
+                />
               </tbody>
             </table>
           </div>
