@@ -5,7 +5,7 @@ import CoinDetail from './CoinDetail.js';
 
 const CoinList = (props) => {
 
-  console.log(props.data);  // debugger - don't delete it that frequently use
+  // console.log(props.data);  // debugger - list initial API data (don't delete it that frequently use)
 
   const [sortType] = useState(props.sortType);
   let filterData = props.data;

@@ -47,6 +47,7 @@ class App extends Component {
   }
 
   updateDetails = (newUpdateData) => {
+    // console.log(newUpdateData); // debugger: list update data
     let data = [...this.state.data];
     newUpdateData.map((element) => {
       let foundObj = data.find((foundElement) => {
@@ -173,6 +174,7 @@ class App extends Component {
               <thead>
                 <tr>
                   <th scope="col">Pair (Base/Quote)</th>
+                  <th scope="col">Open Price</th>
                   <th scope="col">Last Price</th>
                   <th scope="col">{this.state.radioSelection==='option1' ? "Change" : "Volume"} </th>
                 </tr>

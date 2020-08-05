@@ -18,6 +18,7 @@ const CoinDetail = (props) => {
     <tr key={props.element.s}>
       <td><span className="coinDetail-base">{`${props.element.b}`}</span><span className="coinDetail-quote">/{`${props.element.q}`}</span></td>
       <td>{limitDigit((props.element.c),8)}</td>
+      <td>{limitDigit((props.element.o),8)}</td>
       {radio}
     </tr>
   )
