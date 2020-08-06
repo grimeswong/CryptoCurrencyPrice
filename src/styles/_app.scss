@@ -55,6 +55,19 @@ html {
   table {
     color: $primary-text;
     font-family: Rubik;
+    button {
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+      color: transparent;
+      background-color: transparent;
+      border: none;
+    }
+    svg {
+      position: relative;  // avoid fontawesome icon cover the clickable button
+      z-index: -1;
+      color: $gold;
+    }
     th, td {
       width: calc(100vw / 6);
       border-color: rgb(56, 56, 56);

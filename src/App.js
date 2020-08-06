@@ -3,6 +3,8 @@ import './styles/main.scss';
 import Category from './components/Category.js';
 import CoinList from './components/CoinList.js';
 import processUpdateDetails from './components/processUpdateDetails.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSort } from '@fortawesome/free-solid-svg-icons'
 
 class App extends Component {
 
@@ -186,12 +188,12 @@ class App extends Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">Pair (Base/Quote)</th><button value="b" onClick={(e)=>this.changeSorting(e)}>Button</button>
-                  <th scope="col">Last Price</th> <button value="c" onClick={(e)=>this.changeSorting(e)}>Button</button>
-                  <th className="mobile-hide" scope="col">Open Price</th>
-                  <th className="mobile-hide tablet-hide" scope="col">High Price</th>
-                  <th className="mobile-hide tablet-hide" scope="col">Low Price</th>
-                  <th scope="col">{this.state.radioSelection==='option1' ? "Change" : "Volume"} </th>
+                  <th scope="col">Pair <button value="b" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
+                  <th scope="col">Last Price <button value="c" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
+                  <th className="mobile-hide" scope="col">Open Price <button value="o" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
+                  <th className="mobile-hide tablet-hide" scope="col">High Price <button value="h" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
+                  <th className="mobile-hide tablet-hide" scope="col">Low Price <button value="l" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
+                  <th scope="col">{this.state.radioSelection==='option1' ? "Change" : "Volume"}</th>
                 </tr>
               </thead>
               <tbody>
