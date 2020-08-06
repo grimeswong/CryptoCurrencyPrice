@@ -14,8 +14,8 @@ const CoinDetail = (props) => {
   <td className={changeClass}>
     {`${parseFloat(((props.element.c - props.element.o) / props.element.o) * 100).toFixed(2) >= 0 ? "+" : ""}${parseFloat(((props.element.c - props.element.o) / props.element.o) * 100).toFixed(2)}%`}
   </td> :
-  /* Fixed in no decimal number */
-  <td>{props.element.qv.toFixed(0)}</td>
+  /* Fixed in two decimal number */
+  <td>{props.element.qv.toFixed(2)}</td>
 
 
   return(
