@@ -1,20 +1,19 @@
 // A component to display the list of cryptocurrency that can apply specified filtering and sorting
 
-import React, { useState } from 'react';
+import React from 'react';
 import CoinDetail from './CoinDetail.js';
 
 const CoinList = (props) => {
 
   console.log(props.data);  // debugger - list initial API data (don't delete it that frequently use)
 
-  const [sortType] = useState(props.sortType);
   let filterData = props.data;
 
   // Function for sorting data by providing sorting reference or method (eg. b=base, q=quote)
   const sortData = (a, b) => {
-    if(props.ascending ? a[sortType] < b[sortType] : a[sortType] > b[sortType]){
+    if(props.ascending ? a[props.sortType] < b[props.sortType] : a[props.sortType] > b[props.sortType]){
       return -1;
-    } else if (props.ascending ? a[sortType] > b[sortType] : a[sortType] < b[sortType]) {
+    } else if (props.ascending ? a[props.sortType] > b[props.sortType] : a[props.sortType] < b[props.sortType]) {
       return 1;
     } else {
       return 0;
