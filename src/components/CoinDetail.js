@@ -9,7 +9,7 @@ const CoinDetail = (props) => {
   const changeClass = parseFloat(((props.element.c - props.element.o) / props.element.o) * 100).toFixed(2) >= 0 ? "positive" : "negative";
   const lastpriceClass = props.element.c-props.element.o > 0 ? "positive" : "negative";
 
-  const radio = props.radioSelection==='option1' ?
+  const radio = props.radioSelection==='option1' ? /* option1 is 24h Change(formula=c-o/o), option2 is 24h Volume(qv)
   /* Fixed in 2 decimal number with plus or minus sign prefix comparing with open price */
   <td className={changeClass}>
     {`${parseFloat(((props.element.c - props.element.o) / props.element.o) * 100).toFixed(2) >= 0 ? "+" : ""}${parseFloat(((props.element.c - props.element.o) / props.element.o) * 100).toFixed(2)}%`}
