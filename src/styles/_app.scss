@@ -56,14 +56,12 @@ html {
     color: $primary-text;
     font-family: Rubik;
     th, td {
-      width: 33.3%;
+      width: calc(100vw / 6);
       border-color: rgb(56, 56, 56);
-    }
-    th:nth-child(1), th:nth-child(2){
       text-align: left;
     }
-    td:nth-child(1), td:nth-child(2){
-      text-align: left;
+    th:nth-last-child(1), td:nth-last-child(1) {
+      text-align: center;
     }
   }
 }
