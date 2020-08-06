@@ -25,11 +25,11 @@ const CoinDetail = (props) => {
       {/* Last Price */}
       <td className={lastpriceClass}>{limitDigit((props.element.c),8)}</td>
       {/* Open Price */}
-      <td className="coinDetail-open">{limitDigit((props.element.o),8)}</td>
+      <td className="coinDetail-open mobile-hide">{limitDigit((props.element.o),8)}</td>
       {/* 24h High Price */}
-      <td className="coinDetail-highest">{limitDigit((props.element.h),8)}</td>
+      <td className="coinDetail-highest mobile-hide tablet-hide">{limitDigit((props.element.h),8)}</td>
       {/* 24h High Price */}
-      <td className="coinDetail-lowest">{limitDigit((props.element.l),8)}</td>
+      <td className="coinDetail-lowest mobile-hide tablet-hide">{limitDigit((props.element.l),8)}</td>
       {/* 24h Change or Volume */}
       {radio}
     </tr>
