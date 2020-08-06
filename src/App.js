@@ -13,10 +13,12 @@ class App extends Component {
       data: [],   // the cryptocurrency data including updated data via web socket
       websocketState: false,
       websocketData: [],
-      sortType: "b",
+      sortType: "b",    // sorting type eg. b for base, q for quote
+      ascending: true,   // sorting for ascending or descending order
       searchStr: "",    // the current search string in searching box
       currentSelection: "",   // the current selected currency in categories
       radioSelection: "option1" // the current selected radio value
+
     }
   }
 
@@ -129,6 +131,17 @@ class App extends Component {
     })
   }
 
+  // change the sorting typetype
+  changeSorting = (sortEvent) => {
+    console.log(sortEvent.target.value);
+    console.log(this.state.ascending);
+    this.setState({
+      sortType: sortEvent.target.value,
+      ascending: sortEvent.target.value === this.state.sortType ? !this.state.ascending : true
+    })
+  }
+
+
   render() {
     // console.log("rendering!!!") // debugger
     return(
@@ -173,8 +186,8 @@ class App extends Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">Pair (Base/Quote)</th>
-                  <th scope="col">Last Price</th>
+                  <th scope="col">Pair (Base/Quote)</th><button value="b" onClick={(e)=>this.changeSorting(e)}>Button</button>
+                  <th scope="col">Last Price</th> <button value="c" onClick={(e)=>this.changeSorting(e)}>Button</button>
                   <th className="mobile-hide" scope="col">Open Price</th>
                   <th className="mobile-hide tablet-hide" scope="col">High Price</th>
                   <th className="mobile-hide tablet-hide" scope="col">Low Price</th>
@@ -188,6 +201,7 @@ class App extends Component {
                           radioSelection={this.state.radioSelection}
                           dataLoaded={this.state.dataLoaded}
                           sortType={this.state.sortType}
+                          ascending={this.state.ascending}
                 />
               </tbody>
             </table>

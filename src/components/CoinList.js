@@ -12,9 +12,9 @@ const CoinList = (props) => {
 
   // Function for sorting data by providing sorting reference or method (eg. b=base, q=quote)
   const sortData = (a, b) => {
-    if(a[sortType] < b[sortType]){
+    if(props.ascending ? a[sortType] < b[sortType] : a[sortType] > b[sortType]){
       return -1;
-    } else if (a[sortType] > b[sortType]) {
+    } else if (props.ascending ? a[sortType] > b[sortType] : a[sortType] < b[sortType]) {
       return 1;
     } else {
       return 0;
