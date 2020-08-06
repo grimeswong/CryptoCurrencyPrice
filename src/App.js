@@ -174,8 +174,10 @@ class App extends Component {
               <thead>
                 <tr>
                   <th scope="col">Pair (Base/Quote)</th>
-                  <th scope="col">Open Price</th>
                   <th scope="col">Last Price</th>
+                  <th scope="col">Open Price</th>
+                  <th scope="col">High Price</th>
+                  <th scope="col">Low Price</th>
                   <th scope="col">{this.state.radioSelection==='option1' ? "Change" : "Volume"} </th>
                 </tr>
               </thead>

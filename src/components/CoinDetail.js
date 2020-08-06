@@ -20,9 +20,17 @@ const CoinDetail = (props) => {
 
   return(
     <tr key={props.element.s}>
+      {/* Pair */}
       <td><span className="coinDetail-base">{`${props.element.b}`}</span><span className="coinDetail-quote">/{`${props.element.q}`}</span></td>
-      <td>{limitDigit((props.element.o),8)}</td>
+      {/* Last Price */}
       <td className={lastpriceClass}>{limitDigit((props.element.c),8)}</td>
+      {/* Open Price */}
+      <td>{limitDigit((props.element.o),8)}</td>
+      {/* 24h High Price */}
+      <td>{limitDigit((props.element.h),8)}</td>
+      {/* 24h High Price */}
+      <td>{limitDigit((props.element.l),8)}</td>
+      {/* 24h Change or Volume */}
       {radio}
     </tr>
   )
