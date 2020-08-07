@@ -4,13 +4,21 @@
   &-quote {
     color: $dark-grey;
   }
+  &-open {
+    color: $dark-grey;
+  }
+  &-highest {
+    color: $gold;
+  }
+  &-lowest {
+    color: $light-gold;
+  }
 }
 
-
 .positive {
-  color: #FFD700;
+  color: $green;
 }
 
 .negative {
-  color: #f11111;
+  color: $red;
 }

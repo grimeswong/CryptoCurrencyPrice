@@ -10,6 +10,12 @@
     h1 {
       font-size: 2rem;
     }
+    th, td {
+      widht: calc(100vw / 4);
+    }
+    .tablet-hide {
+      display: none;
+    }
   }
 } /* tablet end */
 
@@ -45,6 +51,9 @@
         margin-top: 1rem;
       }
     }
+    .mobile-hide {
+      display: none;
+    }
   }
 
 } /* mobile end */
@@ -77,5 +86,8 @@
 
   table {
     font-size: 0.8rem;
+    th, td {
+      widht: calc(100vw / 3);
+    }
   }
 }
