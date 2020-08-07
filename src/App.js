@@ -15,6 +15,7 @@ class App extends Component {
       data: [],   // the cryptocurrency data including updated data via web socket
       websocketState: false,
       websocketData: [],
+      lastUpdate: "",   // the last update time
       sortType: "b",    // sorting type eg. b for base, q for quote
       ascending: true,   // sorting for ascending or descending order
       searchStr: "",    // the current search string in searching box
@@ -103,6 +104,7 @@ class App extends Component {
     }
   }
 
+  // Call the API to get the initial data (full list)
   callAPI() {
     fetch(`/exchange-api/v1/public/asset-service/product/get-products`)
     .then(res => res.json())
@@ -110,6 +112,8 @@ class App extends Component {
           dataLoaded: true,
           data: res.data
     }))
+    .then(this.lastUpdate)
+
   }
 
   // the current query in searching box
@@ -141,6 +145,12 @@ class App extends Component {
     })
   }
 
+  // stamp the last update time
+  lastUpdate = () => {
+    this.setState({
+      lastUpdate: new Date()
+    })
+  }
 
   render() {
     // console.log("rendering!!!") // debugger
@@ -151,6 +161,7 @@ class App extends Component {
 
           {/* Connection Status */}
           <div className="connection-wrapper">
+            {this.state.lastUpdate=== "" ? null : <p>Last update: "ready to update"</p>}
             <p>status: <span className={this.state.websocketState? "connected" : "disconnected"}>{this.state.websocketState ? "connected" : "disconnected"}</span></p>
             <button className="btn btn-light" onClick={this.state.websocketState ? this.closeServer : this.connectServer }>{!this.state.websocketState ? "connect" : "stop"}</button>
           </div>
