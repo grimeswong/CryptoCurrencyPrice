@@ -191,7 +191,7 @@ class App extends Component {
                   <th className="mobile-hide" scope="col">Open Price <button value="o" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
                   <th className="mobile-hide tablet-hide" scope="col">High Price <button value="h" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
                   <th className="mobile-hide tablet-hide" scope="col">Low Price <button value="l" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
-                  <th scope="col">{this.state.radioSelection==='option1' ? "Change" : "Volume"}<button value="change" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
+                  <th scope="col">{this.state.radioSelection==='option1' ? "Change" : "Volume"}<button value={this.state.radioSelection==='option1' ? "change" : "qv"} onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
                 </tr>
               </thead>
               <tbody>
