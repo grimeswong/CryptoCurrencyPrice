@@ -5,6 +5,7 @@ import CoinList from './components/CoinList.js';
 import processUpdateDetails from './components/processUpdateDetails.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSort } from '@fortawesome/free-solid-svg-icons'
+import moment from '../node_modules/moment'
 
 class App extends Component {
 
@@ -74,6 +75,9 @@ class App extends Component {
         data: data
       }
     );
+
+    // Update the time stamp
+    this.lastUpdate();
   }
 
   websocketListener() {
@@ -161,8 +165,8 @@ class App extends Component {
 
           {/* Connection Status */}
           <div className="connection-wrapper">
-            {this.state.lastUpdate=== "" ? null : <p>Last update: "ready to update"</p>}
-            <p>status: <span className={this.state.websocketState? "connected" : "disconnected"}>{this.state.websocketState ? "connected" : "disconnected"}</span></p>
+            {this.state.lastUpdate=== "" ? null : <p className="lastUpdate">Last update: {moment().format('DD-MM-YYYY, h:mm a')}</p>}
+            <p>Status: <span className={this.state.websocketState? "connected" : "disconnected"}>{this.state.websocketState ? "connected" : "disconnected"}</span></p>
             <button className="btn btn-light" onClick={this.state.websocketState ? this.closeServer : this.connectServer }>{!this.state.websocketState ? "connect" : "stop"}</button>
           </div>
 
