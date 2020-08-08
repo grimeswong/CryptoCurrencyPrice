@@ -18,22 +18,33 @@ html {
     padding: 1rem 0px;
   }
 
-  .connection-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    p {
-      margin: 0;
-      padding: 0 5px;
-      .connected {
-        color: green;
+  .connection {
+    &-wrapper {
+    }
+    &-status {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 1rem 0;
+      p {
+        margin: 0;
+        padding: 0 5px;
+        .connected {
+          color: green;
+        }
+        .disconnected {
+          color: red;
+        }
       }
-      .disconnected {
-        color: red;
+      button {
+        min-width: 85px;
       }
     }
-    button {
-      min-width: 85px;
+    &-lastUpdate {
+      display: flex;
+      justify-content: flex-end;
+      align-items: centre;
+      font-size: 0.8rem;
     }
   }
 
