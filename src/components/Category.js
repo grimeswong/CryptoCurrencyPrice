@@ -41,9 +41,7 @@ const Category = (props) => {
 
   /* customise group name or elements from here */
   sortedCategories.unshift(["All"]);  // can display of the cryptocurrencies
-  sortedCategories[sortedCategories.length-1][0] = "FLATS";   // Swap the group name to "FLATS" that regarding the cryptocurrencies related to currency
-  console.log(sortedCategories);
-
+  sortedCategories[sortedCategories.length-1][0] = "FLAT";   // Swap the group name to "FLATS" that regarding the cryptocurrencies related to currency
 
   // Load the Category list and with button groups
   const displayCategory = sortedCategories.map((element) => {
