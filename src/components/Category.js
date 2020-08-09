@@ -2,7 +2,6 @@ import React from 'react';
 import { Dropdown, DropdownButton, ButtonGroup, Button } from 'react-bootstrap';
 
 const Category = (props) => {
-
   // Process the Category list with groups
   const types = {};
   for (let i = 0; i < props.data.length; i++) {
@@ -11,6 +10,7 @@ const Category = (props) => {
         types[typeName] = [];
     }
     types[typeName].push(props.data[i].q);
+    // console.log(types)
   }
 
   // Remove duplicate elements in group
@@ -36,6 +36,12 @@ const Category = (props) => {
 
   // Sorting array by its first element (symbol or the category which come first)
   sortedCategories.sort(sortData);
+  // Now the first element will be used for the group name and follow by the child currencies
+  // console.log(sortedCategories) // debugger: the first element is the group name, can check the elements in the groups
+
+  /* customise group name or elements from here */
+  sortedCategories.unshift(["All"]);  // can display of the cryptocurrencies
+  sortedCategories[sortedCategories.length-1][0] = "FLAT";   // Swap the group name to "FLATS" that regarding the cryptocurrencies related to currency
 
   // Load the Category list and with button groups
   const displayCategory = sortedCategories.map((element) => {
@@ -53,7 +59,7 @@ const Category = (props) => {
     }
     else {
       return (
-        <Button key={element[0]} variant="dark" onClick={()=>props.currentSelection(element[0])}>{element[0]}</Button>
+        <Button key={element[0]} variant="dark" onClick={()=>props.currentSelection(element[0]=== "All" ? "" : element[0])}>{element[0]}</Button>
       )
     }
   })

@@ -137,8 +137,7 @@ class App extends Component {
   // the current selected radio value
   radioSelection = (changeEvent) => {
     this.setState({
-      radioSelection: changeEvent.target.value,
-      sortType: changeEvent.target.value === "option1" ? "change" : "qv"
+      radioSelection: changeEvent.target.value
     })
   }
 
