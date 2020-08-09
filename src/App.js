@@ -4,7 +4,7 @@ import Category from './components/Category.js';
 import CoinList from './components/CoinList.js';
 import processUpdateDetails from './components/processUpdateDetails.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSort } from '@fortawesome/free-solid-svg-icons'
+import { faSort, faAngleDoubleUp, faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons'
 import moment from '../node_modules/moment'
 
 class App extends Component {
@@ -156,6 +156,15 @@ class App extends Component {
     })
   }
 
+  // For showing the sorting status by ascending or descending
+  sortingStatus = (column) => {
+    if (column === this.state.sortType) {
+      return this.state.ascending === true ?
+      (<FontAwesomeIcon icon={faAngleDoubleDown} />) :
+      (<FontAwesomeIcon icon={faAngleDoubleUp} />)
+    }
+  }
+
   render() {
     // console.log("rendering!!!") // debugger
     return(
@@ -203,12 +212,12 @@ class App extends Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">Pair <button value="b" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
-                  <th scope="col">Last Price <button value="c" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
-                  <th className="mobile-hide" scope="col">Open Price <button value="o" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
-                  <th className="mobile-hide tablet-hide" scope="col">High Price <button value="h" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
-                  <th className="mobile-hide tablet-hide" scope="col">Low Price <button value="l" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
-                  <th scope="col">{this.state.radioSelection==='option1' ? "Change" : "Volume"}<button value={this.state.radioSelection==='option1' ? "change" : "qv"} onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button></th>
+                  <th scope="col">Pair <button value="b" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button><span className="sorting-status">{this.sortingStatus("b")}</span></th>
+                  <th scope="col">Last Price <button value="c" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button><span className="sorting-status">{this.sortingStatus("c")}</span></th>
+                  <th className="mobile-hide" scope="col">Open Price <button value="o" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button><span className="sorting-status">{this.sortingStatus("o")}</span></th>
+                  <th className="mobile-hide tablet-hide" scope="col">High Price <button value="h" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button><span className="sorting-status">{this.sortingStatus("h")}</span></th>
+                  <th className="mobile-hide tablet-hide" scope="col">Low Price <button value="l" onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button><span className="sorting-status">{this.sortingStatus("l")}</span></th>
+                  <th scope="col">{this.state.radioSelection==='option1' ? "Change" : "Volume"}<button value={this.state.radioSelection==='option1' ? "change" : "qv"} onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button><span className="sorting-status">{this.sortingStatus(this.state.radioSelection==='option1' ? "change" : "qv")}</span></th>
                 </tr>
               </thead>
               <tbody>
