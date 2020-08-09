@@ -10,11 +10,17 @@
     h1 {
       font-size: 2rem;
     }
-    th, td {
-      widht: calc(100% / 4);
-    }
-    .tablet-hide {
-      display: none;
+
+    .list-wrapper {
+      table {
+        th, td {
+          width: calc(100% / 4);
+          padding: 0.5rem 5px;
+        }
+        .tablet-hide {
+          display: none;
+        }
+      }
     }
   }
 } /* tablet end */
@@ -51,8 +57,17 @@
         margin-top: 1rem;
       }
     }
-    .mobile-hide {
-      display: none;
+
+    .list-wrapper {
+      table {
+        th, td {
+          width: calc(100% / 3);
+          padding: 0.75rem 5px;
+        }
+        .mobile-hide {
+          display: none;
+        }
+      }
     }
   }
 
@@ -82,12 +97,14 @@
         }
       }
     }
-  }
-
-  table {
-    font-size: 0.8rem;
-    th, td {
-      widht: calc(100% / 3);
+    .list-wrapper {
+      table {
+        font-size: 0.8rem;
+        th, td {
+          width: calc(100% / 3);
+          padding: 0.75rem 5px;
+        }
+      }
     }
   }
 }
