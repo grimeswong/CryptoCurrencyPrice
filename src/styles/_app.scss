@@ -56,43 +56,53 @@ html {
     div {
       display: inline-block;
     }
-
+    .search-wrapper {
+      .form-control:active, .form-control:focus {
+        border-color: $gold;
+        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.5);
+      }
+    }
     .form-wrapper {
       text-align: right;
     }
-
   }
 
-  table {
-    color: $primary-text;
-    font-family: Rubik;
-    button {
-      position: relative;
-      z-index: 2;
-      cursor: pointer;
-      color: transparent;
-      background-color: transparent;
-      border: none;
-      svg {
-        position: relative;  // avoid fontawesome icon cover the clickable button
-        z-index: -1;
-        color: $gold;
+  .list-wrapper {
+    table {
+      color: $primary-text;
+      font-family: Rubik;
+      button {
+        position: relative;
+        z-index: 2;
+        cursor: pointer;
+        color: transparent;
+        background-color: transparent;
+        border: none;
+        svg {
+          position: relative;  // avoid fontawesome icon cover the clickable button
+          z-index: -1;
+          color: $gold;
+        }
       }
-    }
-
-    .sorting-status {
-      svg {
-        color: $dark-grey;
+      .sorting-status {
+        svg {
+          color: $dark-grey;
+          position: absolute;
+          margin-top: 4px;
+        }
       }
-    }
-
-    th, td {
-      width: calc(100vw / 6);
-      border-color: rgb(56, 56, 56);
-      text-align: left;
-    }
-    th:nth-last-child(1), td:nth-last-child(1) {
-      text-align: center;
+      th {
+        position: relative;
+      }
+      th, td {
+        width: calc(100% / 6);
+        border-color: rgb(56, 56, 56);
+        text-align: left;
+      }
+      th:nth-last-child(1), td:nth-last-child(1) {
+        text-align: center;
+      }
     }
   }
+
 }
