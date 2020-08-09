@@ -11,7 +11,7 @@
       font-size: 2rem;
     }
     th, td {
-      widht: calc(100vw / 4);
+      widht: calc(100% / 4);
     }
     .tablet-hide {
       display: none;
@@ -87,7 +87,7 @@
   table {
     font-size: 0.8rem;
     th, td {
-      widht: calc(100vw / 3);
+      widht: calc(100% / 3);
     }
   }
 }
