@@ -41,6 +41,8 @@ html {
           }
         }
         button {
+          color: $black;
+          border: solid 3px $gold !important;
           min-width: 85px;
         }
       }
