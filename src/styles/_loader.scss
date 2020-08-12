@@ -14,22 +14,18 @@
   height: 100vh;
   z-index: 90;
   color: white;
-  background-color: rgba(52, 52, 52, 0.9);
+  background-color: rgba(52, 52, 52, 1);
   @extend %exact-center;
+  transition: opacity 1.5s;
 
   button {
     position: absolute;
-    color: $black !important;
+    color: $black !important;  //override bootstrap default
     background-color: $gold !important;
     border-color: $gold !important;
   }
-}
 
-.loading {
-  overflow: hidden;
-}
-
-.loaded {
-    display: none;
-    transition: 0.8s;
+  &-hide {
+    opacity: 0;
   }
+}

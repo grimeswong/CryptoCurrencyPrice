@@ -17,6 +17,7 @@ class App extends Component {
       data: [],   // the cryptocurrency data including updated data via web socket
       websocketState: false,
       websocketData: [],
+      loaderState: true, // the loader status
       lastUpdate: "",   // the last update time
       sortType: "b",    // sorting type eg. b for base, q for quote
       ascending: true,   // sorting for ascending or descending order
@@ -118,6 +119,7 @@ class App extends Component {
           data: res.data
     }))
     .then(this.lastUpdate)
+    .then(this.loaderStatus)
 
   }
 
@@ -166,11 +168,21 @@ class App extends Component {
     }
   }
 
+  // For switch loader
+  loaderStatus = () => {
+    console.log(this.state.loaderState);
+    this.setState({
+      loaderState: !this.state.loaderState
+    })
+    this.state.loaderState === true ? document.body.style.overflowY = "hidden" : document.body.style.overflowY = "auto";
+    console.log(this.state.loaderState);
+  }
+
   render() {
     // console.log("rendering!!!") // debugger
     return(
       <main className="App">
-        <Loader loading={true} />
+        <Loader loading={this.state.loaderState} />
         <div className="container">
           <h1>Cryptocurrency Portfolio</h1>
           {/* Connection Status */}
