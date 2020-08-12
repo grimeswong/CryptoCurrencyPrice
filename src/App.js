@@ -6,6 +6,7 @@ import processUpdateDetails from './components/processUpdateDetails.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSort, faAngleDoubleUp, faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons'
 import moment from '../node_modules/moment'
+import Loader from './components/Loader.js'
 
 class App extends Component {
 
@@ -171,7 +172,7 @@ class App extends Component {
       <main className="App">
         <div className="container">
           <h1>Cryptocurrency Portfolio</h1>
-
+          <Loader />
           {/* Connection Status */}
           <div className="connection-wrapper">
             <div className="connection-status">
