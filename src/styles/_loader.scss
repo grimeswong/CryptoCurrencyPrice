@@ -16,7 +16,7 @@
   color: white;
   background-color: rgba(52, 52, 52, 1);
   @extend %exact-center;
-  transition: opacity 1.5s;
+  transition: display 2s;
 
   button {
     position: absolute;
@@ -26,6 +26,6 @@
   }
 
   &-hide {
-    opacity: 0;
+    display: none;
   }
 }
