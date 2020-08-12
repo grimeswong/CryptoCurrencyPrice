@@ -1,0 +1,31 @@
+/**
+ *  A loader that cover the visual screen when loading the data
+ **/
+
+%exact-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 90;
+  color: white;
+  background-color: rgba(52, 52, 52, 1);
+  @extend %exact-center;
+  transition: opacity 1.5s;
+
+  button {
+    position: absolute;
+    color: $black !important;  //override bootstrap default
+    background-color: $gold !important;
+    border-color: $gold !important;
+  }
+
+  &-hide {
+    opacity: 0;
+  }
+}

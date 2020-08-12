@@ -3,106 +3,113 @@ html {
 }
 
 .App {
+  position: relative;
   width: 100%;
   min-height: 100vh;
   text-align: center;
   color: $primary-text;
   background-color: $primary;
 
-  h1, h2 {
-    padding: 1rem 5px;
-    margin: 0;
-  }
+  .container {
+    position: relative;
 
-  .section {
-    padding: 1rem 0px;
-  }
-
-  .connection {
-    &-wrapper {
+    h1, h2 {
+      padding: 1rem 5px;
+      margin: 0;
     }
-    &-status {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 1rem 0;
-      p {
-        margin: 0;
-        padding: 0 5px;
-        .connected {
-          color: green;
+
+    .section {
+      padding: 1rem 0px;
+    }
+
+    .connection {
+      &-wrapper {
+      }
+      &-status {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 1rem 0;
+        p {
+          margin: 0;
+          padding: 0 5px;
+          .connected {
+            color: green;
+          }
+          .disconnected {
+            color: red;
+          }
         }
-        .disconnected {
-          color: red;
-        }
-      }
-      button {
-        min-width: 85px;
-      }
-    }
-    &-lastUpdate {
-      display: flex;
-      justify-content: flex-end;
-      align-items: centre;
-      font-size: 0.8rem;
-    }
-  }
-
-  .category-wrapper {
-    width: 100%;
-  }
-
-  .selection-wrapper {
-    div {
-      display: inline-block;
-    }
-    .search-wrapper {
-      .form-control:active, .form-control:focus {
-        border-color: $gold;
-        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.5);
-      }
-    }
-    .form-wrapper {
-      text-align: right;
-    }
-  }
-
-  .list-wrapper {
-    table {
-      color: $primary-text;
-      font-family: Rubik;
-      button {
-        position: relative;
-        z-index: 2;
-        cursor: pointer;
-        color: transparent;
-        background-color: transparent;
-        border: none;
-        svg {
-          position: relative;  // avoid fontawesome icon cover the clickable button
-          z-index: -1;
-          color: $gold;
+        button {
+          min-width: 85px;
         }
       }
-      .sorting-status {
-        svg {
-          color: $dark-grey;
-          position: absolute;
-          margin-top: 4px;
+      &-lastUpdate {
+        display: flex;
+        justify-content: flex-end;
+        align-items: centre;
+        font-size: 0.8rem;
+      }
+    }
+
+    .category-wrapper {
+      width: 100%;
+    }
+
+    .selection-wrapper {
+      div {
+        display: inline-block;
+      }
+      .search-wrapper {
+        .form-control:active, .form-control:focus {
+          border-color: $gold;
+          box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.5);
         }
       }
-      th {
-        position: relative;
+      .form-wrapper {
+        text-align: right;
       }
-      th, td {
-        width: calc(100% / 6);
-        border-color: rgb(56, 56, 56);
-        text-align: left;
-      }
-      th:nth-last-child(1), td:nth-last-child(1) {
-        text-align: center;
+    }
+
+    .list-wrapper {
+      table {
+        color: $primary-text;
+        font-family: Rubik;
+        button {
+          position: relative;
+          z-index: 2;
+          cursor: pointer;
+          color: transparent;
+          background-color: transparent;
+          border: none;
+          svg {
+            position: relative;  // avoid fontawesome icon cover the clickable button
+            z-index: -1;
+            color: $gold;
+          }
+        }
+        .sorting-status {
+          svg {
+            color: $dark-grey;
+            position: absolute;
+            margin-top: 4px;
+          }
+        }
+
+        th {
+          position: relative;
+        }
+        th, td {
+          width: calc(100% / 6);
+          border-color: rgb(56, 56, 56);
+          text-align: left;
+        }
+        th:nth-last-child(1), td:nth-last-child(1) {
+          text-align: center;
+        }
       }
     }
   }
+
 
 }

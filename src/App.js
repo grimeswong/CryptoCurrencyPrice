@@ -6,6 +6,7 @@ import processUpdateDetails from './components/processUpdateDetails.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSort, faAngleDoubleUp, faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons'
 import moment from '../node_modules/moment'
+import Loader from './components/Loader.js'
 
 class App extends Component {
 
@@ -16,6 +17,7 @@ class App extends Component {
       data: [],   // the cryptocurrency data including updated data via web socket
       websocketState: false,
       websocketData: [],
+      loaderState: true, // the loader status
       lastUpdate: "",   // the last update time
       sortType: "b",    // sorting type eg. b for base, q for quote
       ascending: true,   // sorting for ascending or descending order
@@ -117,6 +119,7 @@ class App extends Component {
           data: res.data
     }))
     .then(this.lastUpdate)
+    .then(this.loaderStatus)
 
   }
 
@@ -165,13 +168,23 @@ class App extends Component {
     }
   }
 
+  // For switch loader
+  loaderStatus = () => {
+    console.log(this.state.loaderState);
+    this.setState({
+      loaderState: !this.state.loaderState
+    })
+    this.state.loaderState === true ? document.body.style.overflowY = "hidden" : document.body.style.overflowY = "auto";
+    console.log(this.state.loaderState);
+  }
+
   render() {
     // console.log("rendering!!!") // debugger
     return(
       <main className="App">
+        <Loader loading={this.state.loaderState} />
         <div className="container">
           <h1>Cryptocurrency Portfolio</h1>
-
           {/* Connection Status */}
           <div className="connection-wrapper">
             <div className="connection-status">
@@ -220,7 +233,7 @@ class App extends Component {
                   <th scope="col">{this.state.radioSelection==='option1' ? "Change" : "Volume"}<button value={this.state.radioSelection==='option1' ? "change" : "qv"} onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button><span className="sorting-status">{this.sortingStatus(this.state.radioSelection==='option1' ? "change" : "qv")}</span></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="table-body">
                 <CoinList data={this.state.data}
                           currentSelection={this.state.currentSelection}
                           querySelection={this.state.searchStr}
