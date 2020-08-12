@@ -170,9 +170,9 @@ class App extends Component {
     // console.log("rendering!!!") // debugger
     return(
       <main className="App">
+        <Loader loading={true} />
         <div className="container">
           <h1>Cryptocurrency Portfolio</h1>
-          <Loader />
           {/* Connection Status */}
           <div className="connection-wrapper">
             <div className="connection-status">
@@ -221,7 +221,7 @@ class App extends Component {
                   <th scope="col">{this.state.radioSelection==='option1' ? "Change" : "Volume"}<button value={this.state.radioSelection==='option1' ? "change" : "qv"} onClick={(e)=>this.changeSorting(e)}><FontAwesomeIcon icon={faSort} /></button><span className="sorting-status">{this.sortingStatus(this.state.radioSelection==='option1' ? "change" : "qv")}</span></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="table-body">
                 <CoinList data={this.state.data}
                           currentSelection={this.state.currentSelection}
                           querySelection={this.state.searchStr}
